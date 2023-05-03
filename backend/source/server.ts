@@ -20,7 +20,7 @@ router.use("/assets", express.static(__dirname + "/assets"))
 router.use(fileUpload());
 /** Connect to Mongo */
 mongoose
-    .connect("mongodb+srv://root:071656Ad@cluster0.zekgg7g.mongodb.net/test")
+    .connect("mongodb+srv://it21059940:AFProject@cluster0.4z1oxxy.mongodb.net/?retryWrites=true&w=majority")
     .then((result) => {
         logging.info(NAMESPACE, 'Mongo Connected');
     })
