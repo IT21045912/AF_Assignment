@@ -1,9 +1,10 @@
 import { Document } from 'mongoose';
 
-export default interface IHarvest extends Document {
+export default interface IFertilizer extends Document {
     _id: string,
-    price: number,
-    status: boolean,
+    unit_price: number,
     name: string,
+    contents: string,
+    measurment_unit: string,
     image_path: string,
 }

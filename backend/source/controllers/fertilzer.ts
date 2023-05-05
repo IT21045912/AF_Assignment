@@ -9,15 +9,16 @@ const NAMESPACE = 'Fertlizer';
 
 const createFertlizer = async (req: Request, res: Response, next: NextFunction) => {
     let {
-        price,
-        status,
+        unit_price,
         name,
+        contents,
+        measurement_unit,
         image_path,
     } = req.body;
 
 
     const ProductName = `${name}-${new Date().getTime()}`;
-    // Access the uploaded file using req.files.file
+    //Access the uploaded file using req.files.file
     // const file = req.files.file as UploadedFile;
 
     // // Process the uploaded file
@@ -32,9 +33,10 @@ const createFertlizer = async (req: Request, res: Response, next: NextFunction) 
 
     const _Fertlizer = new Fertlizer({
         _id: new mongoose.Types.ObjectId(),
-        price,
-        status,
+        unit_price,
         name,
+        contents,
+        measurement_unit,
         image_path
     });
 
