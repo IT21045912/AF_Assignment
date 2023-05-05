@@ -12,18 +12,17 @@ function Register() {
     <Container
       fluid
       style={{
-        marginTop: "10%",
+        marginTop: "8%",
         display: "block",
         width: "50%",
         justifyContent: "center",
       }}
     >
       <center style={{ marginBottom: "30px" }}>
-        <h1>Register</h1>
       </center>
       <Row>
         <Col>
-          <div style={{ backgroundColor: "#FFD95A", borderRadius: "10px" ,padding:"10px"}}>
+          <div style={{ backgroundColor: "#2E8B57", borderRadius: "10px" ,padding:"10px"}}>
             <center>
               <img src={image} style={{ padding: "10px" }} />
             </center>
@@ -32,11 +31,11 @@ function Register() {
         <Col>
           <div
             style={{
-              backgroundColor: "#FFD95A",
               borderRadius: "10px",
-              padding: "10px",
+              padding: "8px",
             }}
           >
+            <h2>Sign Up</h2>
             <Form>
               <Form.Group
                 className="mb-3"
