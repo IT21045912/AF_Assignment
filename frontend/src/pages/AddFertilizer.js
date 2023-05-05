@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function AddFertilizer() {
 
-    const [FertilizerName, setFertilizerName] = useState();
+    const [, setFertilizerName] = useState();
     const [Contents, setContents] = useState();
     const [MeasurementUnit, setMeasurementUnit] = useState();
     const [Price, setPrice] = useState();
