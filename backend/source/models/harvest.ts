@@ -3,12 +3,12 @@ import IHarvest from '../interfaces/harvest';
 
 const HarvestSchema: Schema = new Schema(
     {
-        unit_price : {
-            type : Number,
+        seller : {
+            type : String,
             required : true
         },
-        status : {
-            type : Boolean,
+        unit_price : {
+            type : Number,
             required : true
         },
         name : {
@@ -16,6 +16,10 @@ const HarvestSchema: Schema = new Schema(
             required : true
         },
         measurement_unit : {
+            type : String,
+            required : true
+        },
+        category : {
             type : String,
             required : true
         },
