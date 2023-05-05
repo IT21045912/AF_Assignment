@@ -15,7 +15,7 @@ import fileUpload from 'express-fileupload';
 const NAMESPACE = 'Server';
 const router = express();
 
-/** set application assests folder*/ 
+/** set application assests folder*/
 router.use("/assets", express.static(__dirname + "/assets"))
 router.use(fileUpload());
 /** Connect to Mongo */
