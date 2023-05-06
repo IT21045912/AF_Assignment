@@ -6,6 +6,7 @@ import Login from './pages/User/Login';
 import AddHarvest from './pages/AddHarvest';
 import AddFertilizer from './pages/AddFertilizer';
 import FarmerRegister from './pages/User/FarmerRegister';
+import ShowCardVeiew from './pages/HarvestShop';
 import NavBar from './Components/NavBar';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/addHarvest" element ={<AddHarvest/>}/>
         <Route exact path="/addFertilizer" element ={<AddFertilizer/>}/>
         <Route exact path="/FarmerRegister" element ={<FarmerRegister/>}/>
+        <Route exact path="/buyharvest" element ={<ShowCardVeiew/>}/>
       </Routes>
     </>
   );
