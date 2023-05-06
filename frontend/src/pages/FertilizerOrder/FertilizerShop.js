@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Image from "../images/paddy.jpg"
+import Image from "../../images/paddy.jpg"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  function ShowCardVeiew() {
+  function ShowAllFertilizer() {
     const classes = useStyles();
     const navigate = useNavigate();
-    const [harvest, setHarvest] = useState([]);
+    const [fertilizer, setFertilizer] = useState([]);
     const [search, setSearch] = useState("");
  
     const token = localStorage.getItem("Token")
@@ -31,17 +31,17 @@ const useStyles = makeStyles((theme) => ({
         const config = {
             headers: { 'Authorization': `Bearer ${token}` }
         };
-      axios.get('http://localhost:1337/api/harvest-controller/',config)
+      axios.get('http://localhost:1337/api/fertilzer-controller',config)
       .then((res) => {
-            setHarvest(res.data.Harvests);
-            console.log(harvest)
+            setFertilizer(res.data.Fertlizers);
+            console.log(fertilizer)
       })
         .catch((err) => {
           alert(err);
         }).then((d) => {
   
         });
-    }, [harvest]);
+    }, []);
   
     const MoreDetails = (e) => {
       console.log(e._id);
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
           />
           <Button style={{margin:"10px"}}>Search</Button>
           <Grid container spacing={3}>
-             {harvest.filter((e) => {
+             {fertilizer.filter((e) => {
               if(search === ""){
                 return e
             }else if ((e.name.toLowerCase()).includes(search.toLowerCase())){
@@ -85,8 +85,7 @@ const useStyles = makeStyles((theme) => ({
                     <span style={{ fontFamily: 'Copperplate Gothic Light', fontSize: '23px', fontWeight: 'bold' }}>{e.name}</span>
                     <p style={{ fontFamily: 'Impact', fontSize: '23px', fontWeight: 'bold' }}>Rs.{e.unit_price} per {e.measurement_unit}</p>
                     <div style={{ height: '10%' }}>
-                      <p>Category :- {e.category}</p>
-                      <p>For sale by :- {e.seller}</p>
+                      <p>Contents :- {e.contents}</p>
                     </div>
                   </CardContent>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -109,4 +108,4 @@ const useStyles = makeStyles((theme) => ({
     );
   }
   
-  export default ShowCardVeiew;
+  export default ShowAllFertilizer;
