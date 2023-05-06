@@ -24,11 +24,11 @@ function AddFertilizer() {
         formData.append("image_path","example.jpg")
     
         axios.post('http://localhost:1337/api/fertilzer-controller/', formData).then(async res => {
-            console.log("Item inserted");
-            toast.success('Product Insert Successful')
+            console.log("inserted");
+            toast.success('Fertilizer Published Successfully')
         }).catch(err => {
-            console.log("Item insert failed")
-            toast.error('Product Insert Unsuccesful')
+            console.log("insert failed")
+            toast.error('Publish Unsuccesful')
         })
     }
 
@@ -37,7 +37,7 @@ function AddFertilizer() {
         <Container
           fluid
           style={{
-            marginTop: "8%",
+            marginTop: "10%",
             display: "block",
             width: "50%",
             justifyContent: "center",
