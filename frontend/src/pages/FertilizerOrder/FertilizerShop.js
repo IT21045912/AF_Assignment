@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     const MoreDetails = (e) => {
       console.log(e._id);
       const ID = e._id;
-      navigate("/ViewItems", { state: { props: ID } });
+      navigate("/viewfertilizer", { state: { props: ID } });
     };
   
     return (
