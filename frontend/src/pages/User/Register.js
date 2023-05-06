@@ -4,9 +4,9 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import image from "../../Images/farmer.jpg";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Farmer from "../../images/farmer.jpg";
 
 function Register() {
 
@@ -19,7 +19,6 @@ function Register() {
   const Navigate = useNavigate();
 
   const Submit = (e) => {
-    // console.log("Hi");
     e.preventDefault();
 
     const data = {
@@ -31,7 +30,6 @@ function Register() {
       role
     } 
     console.log(data);
-    // http://localhost:1337/api/auth-controller/register
 
     axios.post(`http://localhost:1337/api/auth-controller/register`, data).then(res => {
       if (res.status === 201) {
@@ -76,7 +74,7 @@ function Register() {
         <Col>
           <div style={{ borderRadius: "10px", padding: "10px", background: 'linear-gradient(to bottom, #e5f9db 0%, #66ff99 100%)', borderRadius: "10px", padding: "10px" }}>
             <center>
-              <img src={image} style={{ padding: "10px" }} />
+              <img src={Farmer} style={{ padding: "10px" }} />
             </center>
           </div>
         </Col>
