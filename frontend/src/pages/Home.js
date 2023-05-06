@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Home() {
+  const name = localStorage.getItem('Name');
+  console.log(name);
   const classes = useStyles();
   return (
     <>

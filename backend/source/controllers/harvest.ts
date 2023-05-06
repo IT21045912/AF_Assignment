@@ -9,10 +9,12 @@ const NAMESPACE = 'Harvest';
 
 const createHarvest = async (req: Request, res: Response, next: NextFunction) => {
     let {
+        seller,
         unit_price,
-        status,
         name,
-        measurement_unit
+        measurement_unit,
+        category,
+        image_path
     } = req.body;
 
 
@@ -32,11 +34,12 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
 
     const _Harvest = new Harvest({
         _id: new mongoose.Types.ObjectId(),
+        seller,
         unit_price,
-        status,
         name,
         measurement_unit,
-        image_path : ProductName
+        category,
+        image_path 
     });
 
     return _Harvest
