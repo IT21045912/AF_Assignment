@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import image from "../../images/farmer.jpg";
+import image from "../../Images/farmer.jpg";
 
 function Register() {
   return (
@@ -23,7 +23,7 @@ function Register() {
       </center>
       <Row>
         <Col>
-          <div style={{ backgroundColor: "#FFD95A", borderRadius: "10px" ,padding:"10px"}}>
+          <div style={{ backgroundColor: "#FFD95A", borderRadius: "10px", padding: "10px" }}>
             <center>
               <img src={image} style={{ padding: "10px" }} />
             </center>

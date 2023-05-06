@@ -18,17 +18,11 @@ function NavBar() {
                         navbarScroll
                     >
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#action2">Farmer</Nav.Link>
+                        <Nav.Link href="/Farmer">Farmer</Nav.Link>
 
                     </Nav>
                     <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button>
+                        <Button variant="outline-success">Sign In</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>
