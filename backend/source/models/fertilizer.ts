@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import IHarvest from '../interfaces/harvest';
+import IFertilizer from '../interfaces/fertilizer';
 
 const FertlizerSchema: Schema = new Schema(
     {
@@ -7,11 +7,11 @@ const FertlizerSchema: Schema = new Schema(
             type : Number,
             required : true
         },
-        status : {
-            type : Boolean,
+        name : {
+            type : String,
             required : true
         },
-        name : {
+        contents : {
             type : String,
             required : true
         },
@@ -29,4 +29,4 @@ const FertlizerSchema: Schema = new Schema(
     }
 );
 
-export default mongoose.model<IHarvest>('Fertilizer', FertlizerSchema);
+export default mongoose.model<IFertilizer>('Fertilizer', FertlizerSchema);
