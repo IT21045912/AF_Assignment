@@ -3,6 +3,9 @@ import IUser from '../interfaces/user';
 
 const UserSchema: Schema = new Schema(
     {
+        RegNo: {
+            type: String,
+        },
         name: {
             type: String,
             required: true,
@@ -25,11 +28,14 @@ const UserSchema: Schema = new Schema(
         },
         status: {
             type: Boolean,
-            required: true,
         },
         role: {
             type: String,
             required: true,
+        },
+        filePath: {
+            type: String,
+            
         }
     },
     {
