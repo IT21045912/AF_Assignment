@@ -3,19 +3,41 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/esm/Button';
 import Container from 'react-bootstrap/esm/Container';
 import Table from 'react-bootstrap/Table'
+import { Navigate } from 'react-router';
 
 function AdminDash() {
-    const [pendingOrders, setpendingOrders] = useState([]);
-    const [approvedOrders, setapprovedOrders] = useState([]);
+    const [Farmers, setFarmers] = useState([]);
+    const [ActiveFarmers, setActiveFarmers] = useState([]);
+    const [Users, setUsers] = useState([]);
     const token = localStorage.getItem("Token")
     const config = {
         headers: { 'Authorization': `Bearer ${token}` }
     };
     useEffect(() => {
-        axios.get(`http://localhost:1337/api/auth-controller/get/all`,config).then((res) => {
+        axios.get(`http://localhost:1337/api/auth-controller/get/farmer/inActive`, config).then((res) => {
+            console.log("first", res.data.farmers)
+            setFarmers(res.data.inactiveFarmers)
+            console.log(Farmers);
+
+        }).catch(err => {
+            alert(err)
+        })
+    }, [])
+    useEffect(() => {
+        axios.get(`http://localhost:1337/api/auth-controller/get/farmer/Active`, config).then((res) => {
+            console.log("first", res.data.farmers)
+            setActiveFarmers(res.data.ActiveFarmers)
+            console.log(Farmers);
+
+        }).catch(err => {
+            alert(err)
+        })
+    }, [])
+    useEffect(() => {
+        axios.get(`http://localhost:1337/api/auth-controller/get/users`, config).then((res) => {
             console.log("first", res.data.users)
-            setpendingOrders(res.data.users)
-            console.log(pendingOrders);
+            setUsers(res.data.users)
+            console.log(Users);
 
         }).catch(err => {
             alert(err)
@@ -36,8 +58,9 @@ function AdminDash() {
     const deleteRecord = (e) => {
         const id = e._id
         console.log(id);
-        axios.delete(`http://localhost:1337/order-controller/Order/order/delete/${id}`, config).then(res => {
-            alert("Item Deleted !")
+        axios.delete(`http://localhost:1337/api/auth-controller/delete/${id}`, config).then(res => {
+            alert("User Deleted !")
+            Navigate(-1);
         }).catch(err => {
             alert(err);
         })
@@ -46,7 +69,9 @@ function AdminDash() {
     const updateDetails = (e) => {
         const id = e._id
         console.log(id);
-        axios.patch(`http://localhost:1337/api/auth-controller/${id}`, config)
+        console.log("Update");
+
+        axios.put(`http://localhost:1337/api/auth-controller/farmer/Activate/${id}`, config)
     }
 
     return (
@@ -57,9 +82,10 @@ function AdminDash() {
                     Admin Dashboard
                 </center>
                 </h1>
+                <Button a href='/RequestedLoans'>Loan Requests</Button>
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1, padding: "10px" }}>
-                        <h2>Users</h2>
+                        <h2>Pending Farmers</h2>
                         <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
                             <thead>
 
@@ -72,7 +98,7 @@ function AdminDash() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {pendingOrders.map((elem, id) => (
+                                {Farmers.map((elem, id) => (
                                     <tr key={id} style={{ textAlign: 'center', fontWeight: '400' }}>
                                         <td>{elem.name}</td>
                                         <td>{elem.role}</td>
@@ -84,9 +110,36 @@ function AdminDash() {
                                 ))}
                             </tbody>
                         </Table>
+                    <div style={{ flex: 1, padding: "10px" }}>
+                        <h2>Approved Farmers</h2>
+                        <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
+                            <thead>
+
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Role</th>
+                                    <th>Email</th>
+                                    <th>Edit</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {ActiveFarmers.map((elem, id) => (
+                                    <tr key={id} style={{ textAlign: 'center', fontWeight: '400' }}>
+                                        <td>{elem.name}</td>
+                                        <td>{elem.role}</td>
+                                        <td>{elem.email}</td>
+                                        <td>
+                                                <Button variant="outline-primary" onClick={() => { deleteRecord(elem) }}>Delete</Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
                     </div>
                     <div style={{ flex: 1, padding: "10px" }}>
-                        {/* <h2>Approved Orders</h2>
+                        <h2>Users</h2>
                         <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
                             <thead>
 
@@ -99,18 +152,18 @@ function AdminDash() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {approvedOrders.map((elem, id) => (
+                                {Users.map((elem, id) => (
                                     <tr key={id} style={{ textAlign: 'center', fontWeight: '400' }}>
-                                        <td>{elem.Customer}</td>
-                                        <td>{elem.Status}</td>
-                                        <td>{elem.Amount}</td>
+                                        <td>{elem.name}</td>
+                                        <td>{elem.role}</td>
+                                        <td>{elem.email}</td>
                                         <td>
                                             <Button variant="outline-primary" onClick={() => { deleteRecord(elem) }}>Delete</Button>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
-                        </Table> */}
+                        </Table>
                     </div>
                 </div>
             </Container >

@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import image from "../../images/farmer.jpg";
+import image from "../../Images/farmer.jpg";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

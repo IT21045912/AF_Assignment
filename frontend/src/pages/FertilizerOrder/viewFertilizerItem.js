@@ -8,8 +8,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { MDBInput } from 'mdb-react-ui-kit';
-import Image from "../../images/paddy.jpg"
-
+import Image from '../../Images/paddy.jpg'
 
 const useStyles = makeStyles((theme) => ({
     root: {

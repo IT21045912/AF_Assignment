@@ -11,6 +11,8 @@ import ShowAllFertilizer from './pages/FertilizerOrder/FertilizerShop';
 import ViewItems from './pages/FertilizerOrder/viewFertilizerItem';
 import NavBar from './Components/NavBar';
 import AdminDash from './pages/Admin/AdminDash';
+import LoanForm from './pages/Loan/LoanForm';
+import LoanRequests from './pages/Admin/LoanRequests';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/buyharvest" element ={<ShowCardVeiew/>}/>
         <Route exact path="/buyfertilizer" element ={<ShowAllFertilizer/>}/>
         <Route exact path="/viewfertilizer" element ={<ViewItems/>}/>
+        <Route exact path="/addLoan" element ={<LoanForm/>}/>
+        <Route exact path="/RequestedLoans" element ={<LoanRequests/>}/>
       </Routes>
     </>
   );
