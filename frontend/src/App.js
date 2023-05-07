@@ -11,6 +11,10 @@ import ShowAllFertilizer from './pages/FertilizerOrder/FertilizerShop';
 import ViewItems from './pages/FertilizerOrder/viewFertilizerItem';
 import ViewHarvestItem from './pages/viewHarvestItem';
 import NavBar from './Components/NavBar';
+import Fertilizer from './pages/FertilizerOrder/Fertilizer';
+import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
+import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
+
 
 function App() {
   return (
@@ -27,7 +31,9 @@ function App() {
         <Route exact path="/buyfertilizer" element ={<ShowAllFertilizer/>}/>
         <Route exact path="/viewfertilizer" element ={<ViewItems/>}/>
         <Route exact path="/viewharvest" element ={<ViewHarvestItem/>}/>
-        ViewHarvestItem
+        <Route exact path="/FertilizerAdmin" element={<Fertilizer />} />
+        <Route exact path="/FertilizerViewPage" element={<ViewFertilizer />} />
+        <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
       </Routes>
     </>
   );
