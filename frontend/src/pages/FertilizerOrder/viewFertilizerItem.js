@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/esm/Container'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, Divider, Typography, CardContent } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Button from 'react-bootstrap/esm/Button';
 import Paper from '@material-ui/core/Paper';

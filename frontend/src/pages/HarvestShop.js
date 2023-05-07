@@ -36,39 +36,39 @@ function ShowCardVeiew() {
         setHarvest(res.data.Harvests);
         console.log(harvest)
       })
-      .catch((err) => {
-        alert(err);
-      }).then((d) => {
-
-      });
-  }, [harvest]);
-
-  const MoreDetails = (e) => {
-    console.log(e._id);
-    const ID = e._id;
-    navigate("/ViewItems", { state: { props: ID } });
-  };
-
-  return (
-    <>
-      <div classname={classes.root} style={{ padding: "15px" }}>
-
-        <Form.Control
-          type="search"
-          value={search}
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-          onChange={(e) => { setSearch(e.target.value) }}
-
-        />
-        <Button style={{ margin: "10px" }}>Search</Button>
-        <Grid container spacing={3}>
-          {harvest.filter((e) => {
-            if (search === "") {
-              return e
-            } else if ((e.name.toLowerCase()).includes(search.toLowerCase())) {
-              return e
+        .catch((err) => {
+          alert(err);
+        }).then((d) => {
+  
+        });
+    }, [harvest]);
+  
+    const MoreDetails = (e) => {
+      console.log(e._id);
+      const ID = e._id;
+      navigate("/viewharvest", { state: { props: ID } });
+    };
+  
+    return (
+      <>
+        <div classname={classes.root} style={{ padding: "15px" }}>
+         
+          <Form.Control
+            type="search"
+            value={search}
+            placeholder="Search"
+            className="me-2"
+            aria-label="Search"
+            onChange={(e) => { setSearch(e.target.value) }}
+  
+          />
+          <Button style={{margin:"10px"}}>Search</Button>
+          <Grid container spacing={3}>
+             {harvest.filter((e) => {
+              if(search === ""){
+                return e
+            }else if ((e.name.toLowerCase()).includes(search.toLowerCase())){
+                return e
             }
           }).map((e, i) => (
             <Grid kwy={i} item xs={12} md={3} >
