@@ -13,11 +13,13 @@ function AddHarvest() {
   const [MeasurementUnit, setMeasurementUnit] = useState();
   const [Price, setPrice] = useState();
 
+  const seller = localStorage.getItem("Name")
+
   const Validate = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("seller","Sample")
+    formData.append("seller",seller)
     formData.append("unit_price", Price)
     formData.append("name", ProduceName)
     formData.append("measurement_unit", MeasurementUnit)
