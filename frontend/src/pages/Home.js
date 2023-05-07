@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import profile from '../Images/profile .jpg'
 import harvestStore from '../Images/hy.jpg'
 import money from '../Images/mon1.jpg'
+import harvesttt from '../Images/harvesttt.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -99,7 +100,7 @@ function Home() {
             </Grid>
             <Grid item xs={6} md={4} style={{ height: '90%' }}>
               <Card>
-                <Link to='/buyharvest'>
+                <Link to='/HarvestListing'>
                   <CardActionArea>
                     <img
                       src={harvestStore}
@@ -127,6 +128,24 @@ function Home() {
                     <CardContent style={{ backgroundColor: 'black' }}>
                       <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
                         Raise Concern/Loans
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
+            <Grid item xs={6} md={4} style={{ height: '80%' }}>
+              <Card>
+                <Link to='/buyharvest'>
+                  <CardActionArea>
+                    <img
+                      src={harvesttt}
+                      width="100%"
+                      height="auto"
+                    />
+                    <CardContent style={{ backgroundColor: 'black' }}>
+                      <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
+                        Harvest shop
                       </Typography>
                     </CardContent>
                   </CardActionArea>

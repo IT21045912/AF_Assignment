@@ -27,7 +27,6 @@ function AddHarvest() {
     formData.append("measurement_unit", MeasurementUnit)
     formData.append("category", Category)
     formData.append("quantity", Quantity)
-    formData.append("image_path", "example.jpg")
     formData.append("file", image_path)
 
 
@@ -41,8 +40,8 @@ function AddHarvest() {
   }
 
   const fileUpload = async (e) => {
-    console.log("File set");
     setImage_path(e.target.files[0]);
+    console.log("File set");
   }
 
   return (
@@ -91,7 +90,7 @@ function AddHarvest() {
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Enter product image: </Form.Label>
-          <Form.Control type="file" accept='image/*' required />
+          <Form.Control type="file" accept='image/*' required onChange={(e) => { fileUpload(e) }} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Publish for Sale

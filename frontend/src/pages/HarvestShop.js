@@ -36,23 +36,24 @@ function ShowCardVeiew() {
         setHarvest(res.data.Harvests);
         console.log(harvest)
       })
-        .catch((err) => {
-          alert(err);
-        }).then((d) => {
-  
-        });
-    }, [harvest]);
-  
-    const MoreDetails = (e) => {
-      console.log(e._id);
-      const ID = e._id;
-      navigate("/viewharvest", { state: { props: ID } });
-    };
-  
-    return (
-      <>
-        <div classname={classes.root} style={{ padding: "15px" }}>
-         
+      .catch((err) => {
+        alert(err);
+      }).then((d) => {
+
+      });
+  }, [harvest]);
+
+  const MoreDetails = (e) => {
+    console.log(e._id);
+    const ID = e._id;
+    navigate("/viewharvest", { state: { props: ID } });
+  };
+
+  return (
+    <>
+      <div classname={classes.root} style={{ padding: "15px", }}>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
           <Form.Control
             type="search"
             value={search}
@@ -60,22 +61,25 @@ function ShowCardVeiew() {
             className="me-2"
             aria-label="Search"
             onChange={(e) => { setSearch(e.target.value) }}
-  
+            style={{ width: '50%', height: '40px' }}
+
           />
-          <Button style={{margin:"10px"}}>Search</Button>
-          <Grid container spacing={3}>
-             {harvest.filter((e) => {
-              if(search === ""){
-                return e
-            }else if ((e.name.toLowerCase()).includes(search.toLowerCase())){
-                return e
+          <Button >Search</Button>
+        </div>
+
+        <Grid container spacing={3}>
+          {harvest.filter((e) => {
+            if (search === "") {
+              return e
+            } else if ((e.name.toLowerCase()).includes(search.toLowerCase())) {
+              return e
             }
           }).map((e, i) => (
-            <Grid kwy={i} item xs={12} md={3} >
+            <Grid kwy={i} item xs={6} md={3} >
               <Card style={{ padding: "10px", height: "28rem", }}>
                 <div style={{ height: '11rem', display: 'flex', justifyContent: 'center' }}>
                   <img
-                    src={Image}
+                    src={`http://localhost:1337/uploads/harvest/${e.image_path}`}
                     alt="Nothing"
                     height="100%"
                     width="auto"

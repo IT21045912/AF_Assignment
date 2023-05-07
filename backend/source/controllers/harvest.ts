@@ -15,7 +15,6 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
         measurement_unit,
         category,
         quantity,
-        image_path
     } = req.body;
     const ProductName = `${name}_${new Date().getTime()}`;
     // Access the uploaded file using req.files.file
@@ -29,7 +28,7 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
                 if (err) {
                     return res.status(500).send(err);
                 }
-            })
+            });
         } catch (error) {
             return res.status(500).send(error)
         }
@@ -43,7 +42,7 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
             measurement_unit,
             category,
             quantity,
-            image_path
+            image_path: ProductName
         });
 
         console.log("Model setted successfully")
