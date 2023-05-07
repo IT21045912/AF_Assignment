@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import logging from '../config/logging';
 import Cart from '../models/cart';
-import { UploadedFile } from 'express-fileupload';
+
 
 
 const NAMESPACE = 'Cart';
@@ -96,4 +95,24 @@ const updateCart = (async (req: Request, res: Response) => {
     })
 })
 
-export default { createCart, getAllCarts, getCartById, updateCart };
+const deleteCartItem = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    try {
+        const cart = await Cart.findById(id);
+        if (cart) {
+            await cart.deleteOne();
+            const remainingItems = await Cart.find();
+            return res.status(200).json({ 
+                "message": "Item deleted successfully",
+                "remainingItems": remainingItems 
+            });
+            
+        } else {
+            return res.status(404).json({ "message": "Item not found" });
+        }
+    } catch (err) {
+        return res.status(500).json({ "error": err });
+    }
+}
+
+export default { createCart, getAllCarts, getCartById, updateCart, deleteCartItem};

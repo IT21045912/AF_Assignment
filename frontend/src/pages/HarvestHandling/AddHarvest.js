@@ -48,10 +48,14 @@ function AddHarvest() {
     <Container
       fluid
       style={{
-        marginTop: "8%",
+        marginTop: "5%",
+        marginBottom: "5%",
         display: "block",
         width: "50%",
         justifyContent: "center",
+        backgroundColor: 'white',
+        padding: '20px',
+        borderRadius: '6px'
       }}
     >
       <h2>Publish your Harvest Here!</h2>

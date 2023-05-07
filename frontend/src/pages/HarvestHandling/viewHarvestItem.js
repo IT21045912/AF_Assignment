@@ -46,7 +46,7 @@ function ViewHarvestItem() {
 
 
   const token = localStorage.getItem("Token")
-  const user = localStorage.getItem("Name")
+  const user = localStorage.getItem("uid")
 
   const config = {
     headers: { 'Authorization': `Bearer ${token}` }
