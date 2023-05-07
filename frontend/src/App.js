@@ -10,7 +10,9 @@ import ShowCardVeiew from './pages/HarvestShop';
 import ShowAllFertilizer from './pages/FertilizerOrder/FertilizerShop';
 import ViewItems from './pages/FertilizerOrder/viewFertilizerItem';
 import NavBar from './Components/NavBar';
-import Farmer from './pages/Farmer';
+import Fertilizer from './pages/FertilizerOrder/Fertilizer';
+import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
+import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
 
 
 function App() {
@@ -27,6 +29,9 @@ function App() {
         <Route exact path="/buyharvest" element={<ShowCardVeiew />} />
         <Route exact path="/buyfertilizer" element={<ShowAllFertilizer />} />
         <Route exact path="/viewfertilizer" element={<ViewItems />} />
+        <Route exact path="/FertilizerAdmin" element={<Fertilizer />} />
+        <Route exact path="/FertilizerViewPage" element={<ViewFertilizer />} />
+        <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
       </Routes>
     </>
   );

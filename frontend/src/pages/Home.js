@@ -43,7 +43,7 @@ function Home() {
           <Grid container spacing={3}>
             <Grid item xs={6} md={4} style={{ height: '80%' }}>
               <Card style={{ height: '80%' }}>
-                <Link to='/Farmer'>
+                <Link to='/addHarvest'>
                   <CardActionArea>
                     <img
                       src={harvest}
@@ -61,7 +61,7 @@ function Home() {
             </Grid>
             <Grid item xs={6} md={4} style={{ height: '80%', }}>
               <Card style={{ eight: '80%' }}>
-                <Link to=''>
+                <Link to='/buyfertilizer'>
                   <CardActionArea>
                     <img
                       src={fertilizer}

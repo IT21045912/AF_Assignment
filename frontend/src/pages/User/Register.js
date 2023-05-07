@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Farmer from "../../images/farmer.jpg";
+import Farmer from "../../Images/farmer.jpg";
+import agri from '../../Images/agrii.jpg'
 
 function Register() {
 
@@ -62,19 +63,22 @@ function Register() {
     <Container
       fluid
       style={{
-        marginTop: "8%",
+        marginTop: "5%",
         display: "block",
-        width: "50%",
+        width: "65%",
         justifyContent: "center",
+        backgroundColor: 'white',
+        marginBottom: '5%',
+        borderRadius: '10px'
       }}
     >
       <center style={{ marginBottom: "30px" }}>
       </center>
       <Row>
         <Col>
-          <div style={{ borderRadius: "10px", padding: "10px", background: 'linear-gradient(to bottom, #e5f9db 0%, #66ff99 100%)', borderRadius: "10px", padding: "10px" }}>
+          <div style={{ borderRadius: "10px", padding: "10px", /* background: 'linear-gradient(to bottom, #e5f9db 0%, #66ff99 100%)' */ }}>
             <center>
-              <img src={Farmer} style={{ padding: "10px" }} />
+              <img src={agri} height='auto' width='100%' style={{ marginTop: '12px', borderRadius: '10px' }} />
             </center>
           </div>
         </Col>
@@ -85,7 +89,7 @@ function Register() {
               padding: "8px",
             }}
           >
-            <h2>Sign Up</h2>
+            <h2 style={{ textAlign: 'center' }}>Sign Up</h2>
             <Form >
               <Form.Group
                 className="mb-3"
@@ -127,9 +131,11 @@ function Register() {
                 <Form.Control type="Password" placeholder="Password"
                   onChange={(e) => { setpassword(e.target.value) }} />
               </Form.Group>
-              <Button variant="primary" type="submit" onClick={(e) => { Submit(e) }}>
-                Register
-              </Button>
+              <center>
+                <Button variant="success" type="submit" onClick={(e) => { Submit(e) }} style={{ width: '40%' }}>
+                  Register
+                </Button>
+              </center>
             </Form>
           </div>
         </Col>

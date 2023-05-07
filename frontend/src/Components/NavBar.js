@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
     return (
@@ -18,11 +19,13 @@ function NavBar() {
                         navbarScroll
                     >
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/Farmer">Farmer</Nav.Link>
+                        <Nav.Link href="/FertilizerAdmin">Farmer</Nav.Link>
 
                     </Nav>
                     <Form className="d-flex">
-                        <Button variant="outline-success">Sign In</Button>
+                        <Link to='/Login'>
+                            <Button variant="outline-success">Sign In</Button>
+                        </Link>
                     </Form>
                 </Navbar.Collapse>
             </Container>
