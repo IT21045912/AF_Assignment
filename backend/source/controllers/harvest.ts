@@ -113,4 +113,19 @@ const updateHarvest = (async (req: Request, res: Response) => {
     })
 })
 
-export default { createHarvest, getAllHarvests, getHarvestById, updateHarvest };
+const deleteHarvest = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    try {
+        const Havest = await Harvest.findById(id);
+        if (Havest) {
+            await Havest.deleteOne();
+            return res.status(200).json({ "message": "Fertlizer deleted successfully" });
+        } else {
+            return res.status(404).json({ "message": "Fertlizer not found" });
+        }
+    } catch (err) {
+        return res.status(500).json({ "error": err });
+    }
+}
+
+export default { createHarvest, getAllHarvests, getHarvestById, updateHarvest, deleteHarvest };

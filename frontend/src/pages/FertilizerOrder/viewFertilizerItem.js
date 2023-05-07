@@ -91,11 +91,11 @@ function ViewItems() {
               <center>
 
                 <img
-                  src={Image}
+                  src={`http://localhost:1337/uploads/${item.image_path}`}
                   alt="Nothing"
                   style={{
-                    width: "50%",
-                    height: "100%"
+                    width: "100%",
+                    height: "auto"
                   }}
                 />
               </center>

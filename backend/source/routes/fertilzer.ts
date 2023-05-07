@@ -5,8 +5,9 @@ const router = express.Router();
 
 
 router.post('/', controller.createFertlizer);
-router.get('/:id', extractJWT,controller.getFertlizerById)
-router.put('/:id',controller.updateFertlizer)
-router.get('/',extractJWT, controller.getAllFertlizers);
+router.get('/:id', extractJWT, controller.getFertlizerById)
+router.put('/:id', controller.updateFertlizer)
+router.delete('/deleteFertilizer/:id', controller.deleteFertlizer)
+router.get('/', extractJWT, controller.getAllFertlizers);
 
 export = router;

@@ -15,6 +15,7 @@ import Fertilizer from './pages/FertilizerOrder/Fertilizer';
 import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
 import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
 import HarvestListing from './pages/HarvestHandling/HarvestListing';
+import Updateharvest from './pages/HarvestHandling/Updateharvest';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/FertilizerViewPage" element={<ViewFertilizer />} />
         <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
+        <Route exact path="/HarvestUpdate" element={<Updateharvest />} />
       </Routes>
     </>
   );

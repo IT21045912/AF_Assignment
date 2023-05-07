@@ -42,11 +42,16 @@ function ViewFertilizer() {
     }, [fertilizer])
 
     const deleteFertilizer = (e) => {
-
+        axios.delete(`http://localhost:1337/api/fertilzer-controller/deleteFertilizer/${e}`).then(res => {
+            toast.error('Product Is Deleted Successfuly!!')
+        }).catch(err => {
+            alert(err)
+        })
     }
 
     const updateFertilizer = (data) => {
         navigate("/FertilizerUpdate", { state: { data: data } })
+        console.log("nehvbshvb::", data)
     }
     return (
         <>
