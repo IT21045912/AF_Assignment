@@ -84,9 +84,6 @@ const useStyles = makeStyles((theme) => ({
                   <CardContent>
                     <span style={{ fontFamily: 'Copperplate Gothic Light', fontSize: '23px', fontWeight: 'bold' }}>{e.name}</span>
                     <p style={{ fontFamily: 'Impact', fontSize: '23px', fontWeight: 'bold' }}>Rs.{e.unit_price} per {e.measurement_unit}</p>
-                    <div style={{ height: '10%' }}>
-                      <p>Contents :- {e.contents}</p>
-                    </div>
                   </CardContent>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button

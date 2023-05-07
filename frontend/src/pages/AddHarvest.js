@@ -12,6 +12,7 @@ function AddHarvest() {
   const [Category, setCategory] = useState();
   const [MeasurementUnit, setMeasurementUnit] = useState();
   const [Price, setPrice] = useState();
+  const [Quantity, setQuantity] = useState();
 
   const seller = localStorage.getItem("Name")
 
@@ -24,6 +25,7 @@ function AddHarvest() {
     formData.append("name", ProduceName)
     formData.append("measurement_unit", MeasurementUnit)
     formData.append("category", Category)
+    formData.append("quantity", Quantity)
     formData.append("image_path","example.jpg")
 
     axios.post('http://localhost:1337/api/harvest-controller/', formData).then(async res => {
@@ -74,6 +76,10 @@ function AddHarvest() {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Unit Price (In LKR) :</Form.Label>
               <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }}/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Quantity to sell :</Form.Label>
+              <Form.Control type="Number" placeholder="Quantity to publish for sale.." onChange={(e) => { setQuantity(e.target.value) }}/>
             </Form.Group>
             <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Enter product image: </Form.Label>

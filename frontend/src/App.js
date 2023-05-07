@@ -9,6 +9,7 @@ import FarmerRegister from './pages/User/FarmerRegister';
 import ShowCardVeiew from './pages/HarvestShop';
 import ShowAllFertilizer from './pages/FertilizerOrder/FertilizerShop';
 import ViewItems from './pages/FertilizerOrder/viewFertilizerItem';
+import ViewHarvestItem from './pages/viewHarvestItem';
 import NavBar from './Components/NavBar';
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Route exact path="/buyharvest" element ={<ShowCardVeiew/>}/>
         <Route exact path="/buyfertilizer" element ={<ShowAllFertilizer/>}/>
         <Route exact path="/viewfertilizer" element ={<ViewItems/>}/>
+        <Route exact path="/viewharvest" element ={<ViewHarvestItem/>}/>
+        ViewHarvestItem
       </Routes>
     </>
   );

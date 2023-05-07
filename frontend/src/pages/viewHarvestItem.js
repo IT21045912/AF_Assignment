@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { MDBInput } from 'mdb-react-ui-kit';
-import Image from "../../images/paddy.jpg"
+import Image from "../images/paddy.jpg"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ViewItems() {
+function ViewHarvestItem() {
     const location = useLocation();
     const ID = location.state.props;
     const [item,setItem] = useState([]);
@@ -51,8 +51,8 @@ function ViewItems() {
       headers: { 'Authorization': `Bearer ${token}` }
     };
     useEffect(() => {
-      axios.get(`http://localhost:1337/api/fertilzer-controller/${ID}`,config).then((res) => {
-        setItem(res.data.Fertlizer);
+      axios.get(`http://localhost:1337/api/harvest-controller/${ID}`,config).then((res) => {
+        setItem(res.data.Harvest);
         console.log(item)
       }).catch(err => {
         alert(err)
@@ -104,9 +104,11 @@ function ViewItems() {
             <Grid item  sm={6} >
               <Paper className={classes.paper}>
                 <h2>{item.name}</h2>                   
-                <h4>{item.contents}</h4>
+                <h3>Category - {item.category}</h3>
                 <br/>
-                <h3>Rs.{item.unit_price}.00 per {item.measurement_unit}</h3>
+                <h4>Rs.{item.unit_price}.00 per {item.measurement_unit}</h4>
+                <h4>For sale by {item.seller}.</h4>
+                <h6> All profits will directly go to the farmer</h6>
                 <h5>Enter Amount : </h5>
                 <MDBInput  id='typeNumber' type='number' value={quantity} onChange={(e) => {setQuantity(e.target.value)}} defaultValue={1} style={{width:"100px",marginBottom:"10px"}}/>
               <Button style={{ marginRight:"10px"}} variant="btn btn-info"
@@ -120,4 +122,4 @@ function ViewItems() {
       </>
     )
 }
-  export default ViewItems
+  export default ViewHarvestItem
