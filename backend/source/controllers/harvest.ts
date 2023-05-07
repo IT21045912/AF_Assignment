@@ -14,6 +14,7 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
         name,
         measurement_unit,
         category,
+        quantity,
         image_path
     } = req.body;
 
@@ -39,6 +40,7 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
         name,
         measurement_unit,
         category,
+        quantity,
         image_path 
     });
 
