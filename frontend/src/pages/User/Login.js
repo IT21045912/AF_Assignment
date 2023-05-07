@@ -4,11 +4,27 @@ import Button from "react-bootstrap/esm/Button";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import agri from '../../Images/agri.jpg'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 function Login() {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
   const Navigate = useNavigate();
+  const classes = useStyles();
+
   const Validate = (e) => {
     e.preventDefault();
     const data = {
@@ -37,25 +53,44 @@ function Login() {
       style={{
         marginTop: "10%",
         display: "block",
-        width: "50%",
+        width: "70%",
         justifyContent: "center",
+        backgroundColor: 'white',
+        borderRadius: '10px'
       }}
     >
-      <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Email address :</Form.Label>
-          <Form.Control type="Name" placeholder="Name"
-            onChange={(e) => { setemail(e.target.value) }} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Password :</Form.Label>
-          <Form.Control type="password" placeholder="Password"
-            onChange={(e) => { setpassword(e.target.value) }} />
-        </Form.Group>
-        <Button onClick={Validate} variant="primary">
-          Login
-        </Button>
-      </Form>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <img src={agri} height='100%' width='100%' style={{ borderRadius: '10px' }} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Form>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email address :</Form.Label>
+                <Form.Control type="Name" placeholder="Email Address"
+                  onChange={(e) => { setemail(e.target.value) }} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Password :</Form.Label>
+                <Form.Control type="password" placeholder="Password"
+                  onChange={(e) => { setpassword(e.target.value) }} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Label>Don't have an account ?<a style={{ textDecoration: 'none' }} href='/Register'> Click here.</a></Form.Label>
+                <Form.Label>Are you a producer ? Join with us.<a style={{ textDecoration: 'none' }} href='/FarmerRegister'> Click here.</a></Form.Label>
+              </Form.Group>
+              <center>
+                <Button onClick={Validate} variant="success" style={{ width: '50%' }}>
+                  Login
+                </Button>
+              </center>
+
+            </Form>
+          </Grid>
+        </Grid>
+      </div>
+
     </Container>
   );
 }

@@ -13,46 +13,55 @@ const createFertlizer = async (req: Request, res: Response, next: NextFunction) 
         name,
         contents,
         measurement_unit,
-        image_path,
     } = req.body;
 
 
-    const ProductName = `${name}-${new Date().getTime()}`;
-    //Access the uploaded file using req.files.file
-    // const file = req.files.file as UploadedFile;
+    const ProductName = `${name}_${new Date().getTime()}`;
+    // Access the uploaded file using req.files.file
+    console.log(ProductName)
+    const f = req.files!.file;
 
-    // // Process the uploaded file
-    // // Example: Save the file to disk
-    // file.mv(`uploads/${file.name}`, (err) => {
-    //     if (err) {
-    //         return res.status(500).send(err);
-    //     }
-
-    //     res.send('File uploaded successfully!');
-    // });
-
-    const _Fertlizer = new Fertlizer({
-        _id: new mongoose.Types.ObjectId(),
-        unit_price,
-        name,
-        contents,
-        measurement_unit,
-        image_path
-    });
-
-    return _Fertlizer
-        .save()
-        .then((Fertlizer) => {
-            return res.status(201).json({
-                Fertlizer
+    if (f) {
+        try {
+            const file = f as UploadedFile
+            // Process the uploaded file
+            // Example: Save the file to disk
+            file.mv(`source/uploads/${ProductName}`, (err) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({
-                message: error.message,
-                error
-            });
+        } catch (error) {
+            return res.status(500).send(error);
+        }
+        console.log("file save succesfully")
+        const _Fertlizer = new Fertlizer({
+            _id: new mongoose.Types.ObjectId(),
+            unit_price,
+            name,
+            contents,
+            measurement_unit,
+            image_path: ProductName
         });
+
+        console.log("Model setted successfully")
+
+        return _Fertlizer
+            .save()
+            .then((Fertlizer) => {
+                return res.status(201).json({
+                    Fertlizer
+                });
+            })
+            .catch((error) => {
+                return res.status(500).json({
+                    message: error.message,
+                    error
+                });
+            });
+    } else {
+        return res.status(500).json({ "message": "file not dound" })
+    }
 }
 
 
@@ -105,4 +114,19 @@ const updateFertlizer = (async (req: Request, res: Response) => {
     })
 })
 
-export default { createFertlizer, getAllFertlizers, getFertlizerById, updateFertlizer };
+const deleteFertlizer = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    try {
+        const Fertilizer = await Fertlizer.findById(id);
+        if (Fertilizer) {
+            await Fertilizer.deleteOne();
+            return res.status(200).json({ "message": "Fertlizer deleted successfully" });
+        } else {
+            return res.status(404).json({ "message": "Fertlizer not found" });
+        }
+    } catch (err) {
+        return res.status(500).json({ "error": err });
+    }
+}
+
+export default { createFertlizer, getAllFertlizers, getFertlizerById, updateFertlizer, deleteFertlizer };

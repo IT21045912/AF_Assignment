@@ -6,66 +6,71 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-function AddFertilizer() {
+function AddHarvest() {
 
-  const [FertilizerName, setFertilizerName] = useState();
-  const [Contents, setContents] = useState();
+  const [ProduceName, setProduceName] = useState();
+  const [Category, setCategory] = useState();
   const [MeasurementUnit, setMeasurementUnit] = useState();
   const [Price, setPrice] = useState();
-  const [image_path, setImage_path] = useState()
+  const [Quantity, setQuantity] = useState();
+  const [image_path, setImage_path] = useState();
+
+  const seller = localStorage.getItem("Name")
 
   const Validate = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("seller", seller)
     formData.append("unit_price", Price)
-    formData.append("name", FertilizerName)
-    formData.append("contents", Contents)
+    formData.append("name", ProduceName)
     formData.append("measurement_unit", MeasurementUnit)
+    formData.append("category", Category)
+    formData.append("quantity", Quantity)
     formData.append("file", image_path)
 
-    console.log("unit", MeasurementUnit)
-    console.log("FormData", formData)
 
-    axios.post('http://localhost:1337/api/fertilzer-controller/', formData).then(async res => {
-      console.log("inserted");
-      toast.success('Fertilizer Published Successfully')
+    axios.post('http://localhost:1337/api/harvest-controller/', formData).then(async res => {
+      console.log("Item inserted");
+      toast.success('Product Insert Successful')
     }).catch(err => {
-      console.log("insert failed")
-      toast.error('Publish Unsuccesful')
+      console.log("Item insert failed")
+      toast.error('Product Insert Unsuccesful')
     })
   }
 
   const fileUpload = async (e) => {
-    console.log("File set");
     setImage_path(e.target.files[0]);
+    console.log("File set")
   }
-
 
   return (
     <Container
       fluid
       style={{
-        marginTop: "5%",
-        marginBottom: "5%",
+        marginTop: "8%",
         display: "block",
         width: "50%",
         justifyContent: "center",
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '6px'
       }}
     >
-      <h2>Add Fertilizer for sale</h2>
-      <h5>Once published farmers will be able to purchase them.</h5>
+      <h2>Publish your Harvest Here!</h2>
+      <h5>Once published customers will be able to see and purchase your harvest.</h5>
       <Form onSubmit={Validate}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Name of fetilizer :</Form.Label>
-          <Form.Control type="Name" placeholder="Name of Fertilizer.." onChange={(e) => { setFertilizerName(e.target.value) }} />
+          <Form.Label>Name of Produce :</Form.Label>
+          <Form.Control type="Name" placeholder="Name of Produce.." onChange={(e) => { setProduceName(e.target.value) }} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Contents :</Form.Label>
-          <Form.Control type="Name" placeholder="Brief description of contents.." onChange={(e) => { setContents(e.target.value) }} />
+        <Form.Group className="mb-3" >
+          <Form.Label>Category</Form.Label>
+          <Form.Select onChange={(e) => { setCategory(e.target.value) }}>
+            <option>--Select the category of produce--</option>
+            <option value='Fruits'>Fruits</option>
+            <option value='Vegetables'>Vegetables</option>
+            <option value='Rice & Grains'>Rice & Grains</option>
+            <option value='Meat'>Meat</option>
+            <option value='Dairy'>Dairy</option>
+          </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" >
           <Form.Label>Measurement Unit</Form.Label>
@@ -79,9 +84,13 @@ function AddFertilizer() {
           <Form.Label>Unit Price (In LKR) :</Form.Label>
           <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }} />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Quantity :</Form.Label>
+          <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setQuantity(e.target.value) }} />
+        </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Enter image: </Form.Label>
-          <Form.Control type="file" accept='image/*' onChange={(e) => { fileUpload(e) }} required />
+          <Form.Label>Enter product image: </Form.Label>
+          <Form.Control type="file" accept='image/*' required onChange={(e) => { fileUpload(e) }} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Publish for Sale
@@ -103,5 +112,6 @@ function AddFertilizer() {
   )
 }
 
-export default AddFertilizer
 
+
+export default AddHarvest

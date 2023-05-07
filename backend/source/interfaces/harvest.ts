@@ -7,5 +7,6 @@ export default interface IHarvest extends Document {
     name: string,
     measurement_unit: string,
     category: string,
+    quantity: number,
     image_path: string,
 }

@@ -7,8 +7,8 @@ import userRoutes from './routes/user';
 import fertilizerRoutes from './routes/fertilzer';
 import orderRoutes from './routes/order';
 import loanRoutes from './routes/loan';
-
 import harvestRoutes from './routes/harvest';
+import cartRoutes from './routes/cart';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 
@@ -16,7 +16,7 @@ const NAMESPACE = 'Server';
 const router = express();
 
 /** set application assests folder*/
-router.use("/assets", express.static(__dirname + "/assets"))
+router.use("/uploads", express.static(__dirname + "/uploads"))
 router.use(fileUpload());
 /** Connect to Mongo */
 mongoose
@@ -61,10 +61,10 @@ router.use((req, res, next) => {
 /** Routes go here */
 router.use('/api/auth-controller', userRoutes);
 router.use('/api/harvest-controller', harvestRoutes);
-router.use('/api/fertilzer-controller', fertilizerRoutes);
-router.use('/api/order-controller', fertilizerRoutes);
+router.use('/api/order-controller', orderRoutes);
 router.use('/api/loan-controller', loanRoutes);
-
+router.use('/api/fertilzer-controller', fertilizerRoutes);
+router.use("/api/cart-controller",cartRoutes)
 
 /** Error handling */
 router.use((req, res, next) => {
