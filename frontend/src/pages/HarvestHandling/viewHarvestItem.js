@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { MDBInput } from 'mdb-react-ui-kit';
-import Image from "../Images/paddy.jpg"
+import Image from "../../Images/paddy.jpg"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,11 +42,12 @@ function ViewHarvestItem() {
   const location = useLocation();
   const ID = location.state.props;
   const [item, setItem] = useState([]);
-  const [image, setImages] = useState();
   const [quantity, setQuantity] = useState();
 
 
   const token = localStorage.getItem("Token")
+  const user = localStorage.getItem("Name")
+
   const config = {
     headers: { 'Authorization': `Bearer ${token}` }
   };
@@ -63,19 +64,20 @@ function ViewHarvestItem() {
 
 
   const AddToCart = (e) => {
-    // console.log(e._id);
-    // const Cart =  {
-    //   item:item.ItemNo,
-    //   quantity,
-    //   itemName : item.ItemName,
-    //   price : item.Price
-    // }
-    // console.log(Cart);
-    // axios.post(`${baseURL}/buyer-service-controller/api/buy/cart/add`,Cart ,config).then(res => {
-    //     alert("Item Added To Cart Successfully");
-    //   }).catch(e => {
-    //     alert(e)
-    //   })
+    console.log(e._id);
+    const Cart = {
+      itemId: e._id,
+      itemName: e.name,
+      added_by: user,
+      quantity,
+      price: e.unit_price
+    }
+    console.log(Cart);
+    axios.post('http://localhost:1337/api/cart-controller', Cart).then(res => {
+      alert("Item Added To Cart Successfully");
+    }).catch(e => {
+      alert(e)
+    })
   };
 
   const classes = useStyles();
