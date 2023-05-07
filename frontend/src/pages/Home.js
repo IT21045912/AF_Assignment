@@ -99,7 +99,7 @@ function Home() {
             </Grid>
             <Grid item xs={6} md={4} style={{ height: '90%' }}>
               <Card>
-                <Link to=''>
+                <Link to='/buyharvest'>
                   <CardActionArea>
                     <img
                       src={harvestStore}

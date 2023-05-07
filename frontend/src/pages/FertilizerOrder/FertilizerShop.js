@@ -75,7 +75,7 @@ function ShowAllFertilizer() {
               <Card style={{ padding: "10px", height: "28rem", }}>
                 <div style={{ height: '11rem', display: 'flex', justifyContent: 'center' }}>
                   <img
-                    src={Image}
+                    src={`http://localhost:1337/uploads/${e.image_path}`}
                     alt="Nothing"
                     height="100%"
                     width="auto"

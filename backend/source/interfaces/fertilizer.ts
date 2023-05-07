@@ -5,6 +5,6 @@ export default interface IFertilizer extends Document {
     unit_price: number,
     name: string,
     contents: string,
-    measurment_unit: string,
+    measurement_unit: string,
     image_path: string,
 }

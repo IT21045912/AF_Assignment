@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import logging from '../config/logging';
 import Harvest from '../models/harvest';
-import { UploadedFile } from 'express-fileupload';
+import fileUpload, { UploadedFile } from 'express-fileupload';
 
 
 const NAMESPACE = 'Harvest';
@@ -16,48 +16,53 @@ const createHarvest = async (req: Request, res: Response, next: NextFunction) =>
         category,
         image_path
     } = req.body;
-
-
-    const ProductName = `${name}-${new Date().getTime()}`;
+    const ProductName = `${name}_${new Date().getTime()}`;
     // Access the uploaded file using req.files.file
-    // const file = req.files.file as UploadedFile;
+    console.log(ProductName)
+    const f = req.files!.file;
 
-    // // Process the uploaded file
-    // // Example: Save the file to disk
-    // file.mv(`uploads/${file.name}`, (err) => {
-    //     if (err) {
-    //         return res.status(500).send(err);
-    //     }
+    if (f) {
+        try {
+            const file = f as UploadedFile;
+            file.mv(`source/uploads/Harvest/${ProductName}`, (err) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+            })
+        } catch (error) {
+            return res.status(500).send(error)
+        }
+        console.log("File save successfully")
 
-    //     res.send('File uploaded successfully!');
-    // });
-
-    const _Harvest = new Harvest({
-        _id: new mongoose.Types.ObjectId(),
-        seller,
-        unit_price,
-        name,
-        measurement_unit,
-        category,
-        image_path 
-    });
-
-    return _Harvest
-        .save()
-        .then((Harvest) => {
-            return res.status(201).json({
-                Harvest
-            });
-        })
-        .catch((error) => {
-            return res.status(500).json({
-                message: error.message,
-                error
-            });
+        const _Harvest = new Harvest({
+            _id: new mongoose.Types.ObjectId(),
+            seller,
+            unit_price,
+            name,
+            measurement_unit,
+            category,
+            image_path
         });
+
+        console.log("Model setted successfully")
+
+        return _Harvest
+            .save()
+            .then((Harvest) => {
+                return res.status(201).json({
+                    Harvest
+                });
+            })
+            .catch((error) => {
+                return res.status(500).json({
+                    message: error.message,
+                    error
+                });
+            });
+    } else {
+        return res.status(500).json({ "message": "File not found" })
+    }
 }
-
-
 
 const getAllHarvests = (req: Request, res: Response, next: NextFunction) => {
     Harvest.find()
