@@ -13,7 +13,8 @@ const HarvestSchema: Schema = new Schema(
         },
         name : {
             type : String,
-            required : true
+            required : true,
+            unique: true
         },
         measurement_unit : {
             type : String,
