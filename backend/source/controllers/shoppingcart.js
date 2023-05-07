@@ -81,4 +81,10 @@ async function getItemPrice(itemNo) {
       return null;
     }
 }
+
+module.exports = {
+  addToCart,
+  removeFromCart,
+  viewCart
+}
   

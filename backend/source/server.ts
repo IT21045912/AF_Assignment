@@ -7,8 +7,8 @@ import userRoutes from './routes/user';
 import fertilizerRoutes from './routes/fertilzer';
 import orderRoutes from './routes/order';
 import loanRoutes from './routes/loan';
-
 import harvestRoutes from './routes/harvest';
+import cartRoutes from './routes/cart';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 
@@ -64,7 +64,7 @@ router.use('/api/harvest-controller', harvestRoutes);
 router.use('/api/order-controller', orderRoutes);
 router.use('/api/loan-controller', loanRoutes);
 router.use('/api/fertilzer-controller', fertilizerRoutes);
-
+router.use("/api/cart-controller",cartRoutes)
 
 /** Error handling */
 router.use((req, res, next) => {
