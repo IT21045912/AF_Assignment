@@ -5,28 +5,37 @@ import Container from 'react-bootstrap/esm/Container'
 import Table from 'react-bootstrap/esm/Table'
 
 function LoanRequests() {
-    
+
     const [loans, setLoans] = useState([]);
     const [Aloans, setALoans] = useState([]);
     const token = localStorage.getItem("Token")
     const config = {
         headers: { 'Authorization': `Bearer ${token}` }
     };
+    // useEffect(() => {
+    //     axios.get(`http://localhost:1337/api/loan-controller//approved-loans`, config).then((res) => {
+    //         // console.log("first", res.data)
+    //         setALoans(res.data.Loans)
+    //         console.log(Aloans);
+
+    //     }).catch(err => {
+    //         alert(err)
+    //     })
+    // }, [])
+    // axios.get('http://localhost:1337/api/loan-controller/approved-loans',config)
+    //     .then(response => {
+    //         setALoans(response.data)
+    //         console.log(Aloans);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+
     useEffect(() => {
         axios.get(`http://localhost:1337/api/loan-controller/`, config).then((res) => {
-            console.log("first", res.data)
+            // console.log("first", res.data)
             setLoans(res.data.Loans)
-            console.log(loans);
-
-        }).catch(err => {
-            alert(err)
-        })
-    }, [])
-    useEffect(() => {
-        axios.get(`http://localhost:1337/api/loan-controller/AllApproved`, config).then((res) => {
-            console.log("first", res.data)
-            setALoans(res.data.loans)
-            console.log(loans);
+            // console.log(loans);
 
         }).catch(err => {
             alert(err)
@@ -45,10 +54,11 @@ function LoanRequests() {
                 Admin Dashboard
             </center>
             </h1>
-            <Button>Loan Requests</Button>
+            
+            <h2>Loan Requests</h2>            
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1, padding: "10px" }}>
-                    <h2>Pending Requests</h2>
+                    <h2>Pending Loans</h2>
                     <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
                         <thead>
 
@@ -71,9 +81,7 @@ function LoanRequests() {
                                     <td>{elem.time}</td>
                                     <td>
                                         <Button variant="outline-primary" onClick={() => { updateDetails(elem) }}>Approve</Button>
-                                        <Button variant="outline-danger" onClick={() => { updateDetails(elem) }} style={{marginLeft:"10px"}}>Reject</Button>
-                                    </td>
-                                    <td>
+                                        <Button variant="outline-danger" onClick={() => { updateDetails(elem) }} style={{ marginLeft: "10px" }}>Reject</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -81,33 +89,37 @@ function LoanRequests() {
                     </Table>
                 </div>
             </div>
-                <div style={{  padding: "10px" }}>
-                    <h2>Users</h2>
-                    <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
-                        <thead>
+            <div style={{ padding: "10px" }}>
+                <h2>Approved Loans</h2>
+                <Table striped bordered hover style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
+                    <thead>
 
-                            <tr>
-                                <th>Customer</th>
-                                <th>Status</th>
-                                <th>Amount</th>
-                                <th>Edit</th>
-
+                        <tr>
+                            <th>Customer</th>
+                            <th>Reason</th>
+                            <th>Special Notice</th>
+                            <th>Amount</th>
+                            <th>Time</th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* {Aloans.map((elem, id) => ( */}
+                            <tr style={{ textAlign: 'center', fontWeight: '400' }}>
+                                <td>Shehan</td>
+                                <td>Buy New Tractor</td>
+                                <td>Need Within 1 Week</td>
+                                <td>Rs.250,000,000</td>
+                                <td>2025-02-16</td>
+                                <td>
+                                    <Button variant="outline-primary" >Update</Button>
+                                    <Button variant="outline-danger" style={{ marginLeft: "10px" }}    >Delete</Button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                        {Aloans.map((elem, id) => (
-                                <tr key={id} style={{ textAlign: 'center', fontWeight: '400' }}>
-                                    {/* <td>{elem.name}</td>
-                                    <td>{elem.role}</td>
-                                    <td>{elem.email}</td> */}
-                                    <td>
-                                        {/* <Button variant="outline-primary" onClick={() => { deleteRecord(elem) }}>Delete</Button> */}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
+                        {/* ))} */}
+                    </tbody>
+                </Table>
+            </div>
         </Container >
     )
 }

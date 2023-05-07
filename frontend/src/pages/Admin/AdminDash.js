@@ -82,6 +82,7 @@ function AdminDash() {
                     Admin Dashboard
                 </center>
                 </h1>
+                
                 <Button a href='/RequestedLoans'>Loan Requests</Button>
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1, padding: "10px" }}>
@@ -130,7 +131,7 @@ function AdminDash() {
                                         <td>{elem.role}</td>
                                         <td>{elem.email}</td>
                                         <td>
-                                                <Button variant="outline-primary" onClick={() => { deleteRecord(elem) }}>Delete</Button>
+                                                <Button variant="outline-danger" onClick={() => { deleteRecord(elem) }}>Delete</Button>
                                         </td>
                                     </tr>
                                 ))}
@@ -158,7 +159,7 @@ function AdminDash() {
                                         <td>{elem.role}</td>
                                         <td>{elem.email}</td>
                                         <td>
-                                            <Button variant="outline-primary" onClick={() => { deleteRecord(elem) }}>Delete</Button>
+                                            <Button variant="outline-danger" onClick={() => { deleteRecord(elem) }}>Delete</Button>
                                         </td>
                                     </tr>
                                 ))}
