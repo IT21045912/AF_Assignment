@@ -4,12 +4,28 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import image from "../../images/farmer.jpg";
+import image from "../../Images/farmer.jpg";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import agri from '../../Images/agrii.jpg'
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 function FarmerRegister() {
 
+  const classes = useStyles();
   const [RegNo, setRegNo] = useState();
   const [name, setname] = useState();
   const [email, setemail] = useState();
@@ -70,31 +86,21 @@ function FarmerRegister() {
     <Container
       fluid
       style={{
-        marginTop: "8%",
+        marginTop: "4%",
         display: "block",
-        width: "50%",
+        width: "76%",
         justifyContent: "center",
       }}
     >
-      <center style={{ marginBottom: "30px" }}>
-      </center>
-      <Row>
-        <Col>
-          {/* linear- gradient(to bottom, #e5f9db 0 %, #66ff99 100 %), */}
-          <div style={{ borderRadius: "10px", padding: "10px", background: 'linear-gradient(to bottom, #e5f9db 0%, #66ff99 100%)' }}>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
             <center>
-              <img src={image} style={{ padding: "10px" }} />
+              <img src={agri} height='auto' width='100%' style={{ marginTop: '12px', borderRadius: '10px' }} />
             </center>
-          </div>
-        </Col>
-        <Col>
-          <div
-            style={{
-              borderRadius: "10px",
-              padding: "8px",
-            }}
-          >
-            <h2>Sign Up</h2>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <h2 style={{ textAlign: 'center', fontFamily: 'Consolas', fontWeight: 'bold' }}>Sign Up</h2>
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Registration No :</Form.Label>
@@ -131,13 +137,15 @@ function FarmerRegister() {
                 <Form.Control type="file" accept='image/*' required
                   onChange={(e) => { setfilePath(e.target.value) }} />
               </Form.Group>
-              <Button variant="primary" type="submit" onClick={(e) => { Submit(e) }}>
-                Register
-              </Button>
+              <center>
+                <Button variant="success" type="submit" onClick={(e) => { Submit(e) }} style={{ width: '50%' }}>
+                  Register
+                </Button>
+              </center>
             </Form>
-          </div>
-        </Col>
-      </Row>
+          </Grid>
+        </Grid>
+      </div>
     </Container>
   );
 }

@@ -61,9 +61,9 @@ router.use((req, res, next) => {
 /** Routes go here */
 router.use('/api/auth-controller', userRoutes);
 router.use('/api/harvest-controller', harvestRoutes);
-router.use('/api/fertilzer-controller', fertilizerRoutes);
-router.use('/api/order-controller', fertilizerRoutes);
+router.use('/api/order-controller', orderRoutes);
 router.use('/api/loan-controller', loanRoutes);
+router.use('/api/fertilzer-controller', fertilizerRoutes);
 
 
 /** Error handling */
