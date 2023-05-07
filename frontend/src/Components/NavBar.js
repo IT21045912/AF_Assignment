@@ -3,10 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function NavBar() {
+    const navigate = useNavigate();
+    const userRole = localStorage.getItem("Role")
+    function handleClick() {
+        localStorage.clear();
+        navigate("/")
+    }
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
@@ -20,12 +25,18 @@ function NavBar() {
                     >
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/FertilizerAdmin">Farmer</Nav.Link>
+                        {userRole === "Admin" && <Nav.Link href="/AdminDash">Admin</Nav.Link>}
 
                     </Nav>
+                    <Link to='/UserProfile'>
+                        <Button variant="info" onClick={handleClick} style={{ marginRight: '15px' }}>Profile</Button>
+                    </Link>
                     <Form className="d-flex">
-                        <Link to='/Login'>
+                        {!userRole ? <Button variant="outline-success" href='/Login' style={{ marginRight: '15px' }}>Sign In</Button> :
+                            <Button variant="outline-danger" onClick={handleClick} style={{ marginRight: '15px' }}>Sign Out</Button>}
+                        {/* <Link to='/Login'>
                             <Button variant="outline-success">Sign In</Button>
-                        </Link>
+                        </Link> */}
                     </Form>
                 </Navbar.Collapse>
             </Container>
