@@ -11,6 +11,7 @@ import harvestRoutes from './routes/harvest';
 import cartRoutes from './routes/cart';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
+import loanCOntrolle2 from "./routes/loan";
 
 const NAMESPACE = 'Server';
 const router = express();
