@@ -13,6 +13,7 @@ function AddHarvest() {
   const [MeasurementUnit, setMeasurementUnit] = useState();
   const [Price, setPrice] = useState();
   const [Quantity, setQuantity] = useState();
+  const [image_path, setImage_path] = useState();
 
   const seller = localStorage.getItem("Name")
 
@@ -26,7 +27,7 @@ function AddHarvest() {
     formData.append("measurement_unit", MeasurementUnit)
     formData.append("category", Category)
     formData.append("quantity", Quantity)
-    formData.append("image_path", "example.jpg")
+    formData.append("file", image_path)
 
 
     axios.post('http://localhost:1337/api/harvest-controller/', formData).then(async res => {
@@ -36,6 +37,11 @@ function AddHarvest() {
       console.log("Item insert failed")
       toast.error('Product Insert Unsuccesful')
     })
+  }
+
+  const fileUpload = async (e) => {
+    setImage_path(e.target.files[0]);
+    console.log("File set")
   }
 
   return (
@@ -84,7 +90,7 @@ function AddHarvest() {
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Enter product image: </Form.Label>
-          <Form.Control type="file" accept='image/*' required />
+          <Form.Control type="file" accept='image/*' required onChange={(e) => { fileUpload(e) }} />
         </Form.Group>
         <Button variant="primary" type="submit">
           Publish for Sale
