@@ -24,6 +24,9 @@ function AddFertilizer() {
     formData.append("measurement_unit", MeasurementUnit)
     formData.append("file", image_path)
 
+    console.log("unit", MeasurementUnit)
+    console.log("FormData", formData)
+
     axios.post('http://localhost:1337/api/fertilzer-controller/', formData).then(async res => {
       console.log("inserted");
       toast.success('Fertilizer Published Successfully')

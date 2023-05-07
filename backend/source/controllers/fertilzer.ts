@@ -9,10 +9,10 @@ const NAMESPACE = 'Fertlizer';
 
 const createFertlizer = async (req: Request, res: Response, next: NextFunction) => {
     let {
-        price,
-        status,
+        unit_price,
         name,
-        image_path,
+        contents,
+        measurement_unit,
     } = req.body;
 
 
@@ -26,7 +26,7 @@ const createFertlizer = async (req: Request, res: Response, next: NextFunction) 
             const file = f as UploadedFile
             // Process the uploaded file
             // Example: Save the file to disk
-            file.mv(`uploads/${ProductName}`, (err) => {
+            file.mv(`source/uploads/${ProductName}`, (err) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
@@ -37,11 +37,14 @@ const createFertlizer = async (req: Request, res: Response, next: NextFunction) 
         console.log("file save succesfully")
         const _Fertlizer = new Fertlizer({
             _id: new mongoose.Types.ObjectId(),
-            price,
-            status,
+            unit_price,
             name,
-            image_path
+            contents,
+            measurement_unit,
+            image_path: ProductName
         });
+
+        console.log("Model setted successfully")
 
         return _Fertlizer
             .save()

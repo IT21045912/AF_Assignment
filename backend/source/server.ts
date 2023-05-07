@@ -16,7 +16,7 @@ const NAMESPACE = 'Server';
 const router = express();
 
 /** set application assests folder*/
-router.use("/assets", express.static(__dirname + "/assets"))
+router.use("/uploads", express.static(__dirname + "/uploads"))
 router.use(fileUpload());
 /** Connect to Mongo */
 mongoose
