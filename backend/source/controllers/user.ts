@@ -46,6 +46,20 @@ const register = (req: Request, res: Response, next: NextFunction) => {
             });
     });
 };
+const deleteUser = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findOneAndDelete({ _id: id });
+    if (user) {
+      return res.status(200).json({ message: "User deleted successfully" });
+    } else {
+      return res.status(404).json({ message: "User not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+}
+
 
 const login = (req: Request, res: Response, next: NextFunction) => {
     let { email, password } = req.body;
@@ -120,10 +134,44 @@ const getUserById = (async (req: Request, res: Response) => {
         return res.status(500).json({ "error": err })
     })
 })
+const getAllFarmers = async (req: Request, res: Response) => {
+  try {
+    const farmers = await User.find({ role: 'Farmer' });
+    return res.status(200).json({ farmers });
+  } catch (err) {
+    return res.status(500).json({ "error": err });
+  }
+}
+const getOnlyUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find({ role: 'User' });
+    return res.status(200).json({ users });
+  } catch (err) {
+    return res.status(500).json({ "error": err });
+  }
+}
 
+const getInactiveFarmers = async (req: Request, res: Response) => {
+  try {
+    const inactiveFarmers = await User.find({ role: 'Farmer', status: false });
+    return res.status(200).json({ inactiveFarmers });
+  } catch (err) {
+    return res.status(500).json({ "error": err});
+  }
+}
+const getActiveFarmers = async (req: Request, res: Response) => {
+  try {
+    const ActiveFarmers = await User.find({ role: 'Farmer', status: true });
+    return res.status(200).json({ ActiveFarmers });
+  } catch (err) {
+    return res.status(500).json({ "error": err});
+  }
+}
 
 const updateUser = (async (req: Request, res: Response) => {
     const id = req.params.id;
+    console.log(id);
+    
     return await User.findById(id).then((user) => {
         if (user) {
             return user.set(req.body).save().then((user) => {
@@ -138,5 +186,19 @@ const updateUser = (async (req: Request, res: Response) => {
         return res.status(500).json({ "error": err })
     })
 })
+const activateUser = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findOneAndUpdate({ _id: id, role: 'Farmer', status: false }, { status: true }, { new: true });
+    if (user) {
+      return res.status(200).json({ user });
+    } else {
+      return res.status(404).json({ "message": "user not found or is already active" });
+    }
+  } catch (err) {
+    return res.status(500).json({ "error": err });
+  }
+}
 
-export default { validateToken, register, login, getAllUsers, getUserById, updateUser };
+
+export default {deleteUser,activateUser,getActiveFarmers,getInactiveFarmers, getOnlyUsers, validateToken, register, login, getAllUsers, getUserById, updateUser,getAllFarmers };

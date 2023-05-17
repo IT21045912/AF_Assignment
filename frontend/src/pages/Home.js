@@ -118,7 +118,7 @@ function Home() {
             </Grid>
             <Grid item xs={6} md={4} style={{ height: '80%' }}>
               <Card>
-                <Link to=''>
+                <Link to='/LoanForm'>
                   <CardActionArea>
                     <img
                       src={money}

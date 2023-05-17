@@ -17,12 +17,15 @@ const HarvestSchema: Schema = new Schema(
         },
         special_notice : {
             type : String,
-            required : true
         },
         amount : {
             type : Number,
             required : true
         },
+        time : {
+            type : String,
+            required : true
+        }
     },
     {
         timestamps: true
