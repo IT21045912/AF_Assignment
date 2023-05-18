@@ -15,6 +15,7 @@ import Fertilizer from './pages/FertilizerOrder/Fertilizer';
 import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
 import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
 import HarvestListing from './pages/HarvestHandling/HarvestListing';
+import HarvestCart from './pages/HarvestHandling/harvestCart';
 
 import AdminDash from './pages/Admin/AdminDash';
 import LoanForm from './pages/Loan/LoanForm';
@@ -45,8 +46,10 @@ function App() {
         <Route exact path="/FertilizerViewPage" element={<ViewFertilizer />} />
         <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
+        <Route exact path="/HarvestCart" element={<HarvestCart />} />
         <Route exact path="/LoanForm" element={<LoanForm />} /> 
-        {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />}
+        <Route exact path="/AdminDash" element={<AdminDash />} />
+        {/* {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />} */}
         <Route exact path="/RequestedLoans" element={<LoanRequests />} /> 
         <Route exact path="/UserProfile" element={<UserProfile />} /> 
         <Route exact path="/Cart" element={<Cart />} /> 

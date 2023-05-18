@@ -1,11 +1,10 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 import config from '../config/config';
 import logging from '../config/logging';
-import IUser from '../interfaces/user';
 
 const NAMESPACE = 'Auth';
 
-const signJWT = (user: IUser, callback: (error: Error | null, token: string | null) => void): void => {
+const signJWT = (user, callback) => {
     var timeSinceEpoch = new Date().getTime();
     var expirationTime = timeSinceEpoch + Number(config.server.token.expireTime) * 100000;
     var expirationTimeInSeconds = Math.floor(expirationTime / 1000);
@@ -31,10 +30,10 @@ const signJWT = (user: IUser, callback: (error: Error | null, token: string | nu
                 }
             }
         );
-    } catch (error : any) {
+    } catch (error) {
         logging.error(NAMESPACE, error, error);
         callback(error, null);
     }
 };
 
-export default signJWT;
+module.exports = signJWT;

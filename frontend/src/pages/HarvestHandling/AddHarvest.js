@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Container from "react-bootstrap/esm/Container";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,10 +48,14 @@ function AddHarvest() {
     <Container
       fluid
       style={{
-        marginTop: "8%",
+        marginTop: "5%",
+        marginBottom: "5%",
         display: "block",
         width: "50%",
         justifyContent: "center",
+        backgroundColor: 'white',
+        padding: '20px',
+        borderRadius: '6px'
       }}
     >
       <h2>Publish your Harvest Here!</h2>

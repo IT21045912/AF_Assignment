@@ -3,12 +3,12 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import userRoutes from './routes/user';
-import fertilizerRoutes from './routes/fertilzer';
-import orderRoutes from './routes/order';
-import loanRoutes from './routes/loan';
-import harvestRoutes from './routes/harvest';
-import cartRoutes from './routes/cart';
+const userRoutes = require('./routes/user');
+const fertilizerRoutes = require('./routes/fertilzer');
+const cartRoutes = require('./routes/cart')
+const orderRoutes = require('./routes/order');
+const loanRoutes = require('./routes/loan');
+const harvestRoutes = require('./routes/harvest');
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 
