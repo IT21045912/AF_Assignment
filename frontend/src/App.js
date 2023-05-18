@@ -48,7 +48,8 @@ function App() {
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
         <Route exact path="/HarvestCart" element={<HarvestCart />} />
         <Route exact path="/LoanForm" element={<LoanForm />} /> 
-        {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />}
+        <Route exact path="/AdminDash" element={<AdminDash />} />
+        {/* {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />} */}
         <Route exact path="/RequestedLoans" element={<LoanRequests />} /> 
         <Route exact path="/UserProfile" element={<UserProfile />} /> 
         <Route exact path="/Cart" element={<Cart />} /> 
