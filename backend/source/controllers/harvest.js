@@ -94,6 +94,21 @@ const getHarvestById = async (req, res) => {
     });
 };
 
+const getAllHarvestsBySeller = async (req, res) => {
+    const sellerId = req.params.sellerId; 
+    try {
+      const harvests = await Harvest.find({ seller: sellerId });
+      if (harvests.length > 0) {
+        return res.status(200).json({ harvests });
+      } else {
+        return res.status(404).json({ "message": "Harvests not found" });
+      }
+    } catch (err) {
+      return res.status(500).json({ "error": err });
+    }
+  };
+  
+
 const updateHarvest = async (req, res) => {
     const id = req.params.id;
     return await Harvest.findById(id).then((Harvest) => {
@@ -128,4 +143,4 @@ const deleteHarvest = async (req, res) => {
 };
 
 
-module.exports = { createHarvest, getAllHarvests, getHarvestById, updateHarvest, deleteHarvest };
+module.exports = { createHarvest, getAllHarvests, getHarvestById, updateHarvest, deleteHarvest, getAllHarvestsBySeller};

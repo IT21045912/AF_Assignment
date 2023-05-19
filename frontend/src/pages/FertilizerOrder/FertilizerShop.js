@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import Image from "../../Images/paddy.jpg"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +33,7 @@ function ShowAllFertilizer() {
     };
     axios.get('http://localhost:1337/api/fertilzer-controller', config)
       .then((res) => {
-        setFertilizer(res.data.Fertlizers);
+        setFertilizer(res.data.Fertilizers);
         console.log(fertilizer)
       })
       .catch((err) => {

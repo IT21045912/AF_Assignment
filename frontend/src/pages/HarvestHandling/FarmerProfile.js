@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import {
     MDBCol,
     MDBContainer,
@@ -10,28 +12,42 @@ import {
     MDBBtn,
     MDBBreadcrumb,
     MDBBreadcrumbItem,
-    MDBProgress,
-    MDBProgressBar,
-    MDBIcon,
-    MDBListGroup,
-    MDBListGroupItem
 } from 'mdb-react-ui-kit';
 import Table from 'react-bootstrap/esm/Table';
 
 function UserProfile() {
+
+    const user_name = localStorage.getItem("Name")
+    const user_email = localStorage.getItem("Email")
+    const user_address = localStorage.getItem("Address")
+    const user_contact = localStorage.getItem("ContactNo")
+    const [harvest, setHarvest] = useState([]);
+
+    const token = localStorage.getItem("Token");
+    const user = localStorage.getItem("Name");
+
+    useEffect(() => {
+        const config = {
+            headers: { 'Authorization': `Bearer ${token}` }
+        };
+
+        axios.get(`http://localhost:1337/api/harvest-controller/seller/${user}`, config).then((res) => {
+            setHarvest(res.data.harvests);
+            console.log("Harvests: ", harvest);
+        }).catch((err) => {
+            alert(err);
+        }).then((d) => {
+
+        })
+    }, [harvest])
+
     return (
         <section style={{  }}>
             <MDBContainer className="py-5">
                 <MDBRow>
                     <MDBCol>
                         <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
-                            <MDBBreadcrumbItem>
-                                <a href='#'>Home</a>
-                            </MDBBreadcrumbItem>
-                            <MDBBreadcrumbItem>
-                                <a href="#">User</a>
-                            </MDBBreadcrumbItem>
-                            <MDBBreadcrumbItem active>User Profile</MDBBreadcrumbItem>
+                            <MDBBreadcrumbItem active>My Profile</MDBBreadcrumbItem>
                         </MDBBreadcrumb>
                     </MDBCol>
                 </MDBRow>
@@ -46,50 +62,23 @@ function UserProfile() {
                                     className="rounded-circle"
                                     style={{ width: '150px' }}
                                     fluid />
-                                <p className="text-muted mb-1">Shehan Ruwanga</p>
-                                <p className="text-muted mb-4">Polonnaruwa / Sri Lanka</p>
+                                <p className="text-muted mb-1">Active Producer</p>
+                                <p className="text-muted mb-1">Name : {user_name}</p>
                                 <div className="d-flex justify-content-center mb-2">
                                     <MDBBtn outline className="ms-1">Contact</MDBBtn>
                                 </div>
                             </MDBCardBody>
                         </MDBCard>
-
-                        {/* <MDBCard className="mb-4 mb-lg-0">
-                            <MDBCardBody className="p-0">
-                                <MDBListGroup flush className="rounded-3">
-                                    <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBIcon fas icon="globe fa-lg text-warning" />
-                                        <MDBCardText>https://mdbootstrap.com</MDBCardText>
-                                    </MDBListGroupItem>
-                                    <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBIcon fab icon="github fa-lg" style={{ color: '#333333' }} />
-                                        <MDBCardText>mdbootstrap</MDBCardText>
-                                    </MDBListGroupItem>
-                                    <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBIcon fab icon="twitter fa-lg" style={{ color: '#55acee' }} />
-                                        <MDBCardText>@mdbootstrap</MDBCardText>
-                                    </MDBListGroupItem>
-                                    <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBIcon fab icon="instagram fa-lg" style={{ color: '#ac2bac' }} />
-                                        <MDBCardText>mdbootstrap</MDBCardText>
-                                    </MDBListGroupItem>
-                                    <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBIcon fab icon="facebook fa-lg" style={{ color: '#3b5998' }} />
-                                        <MDBCardText>mdbootstrap</MDBCardText>
-                                    </MDBListGroupItem>
-                                </MDBListGroup>
-                            </MDBCardBody>
-                        </MDBCard> */}
                     </MDBCol>
                     <MDBCol lg="8">
                         <MDBCard className="mb-4">
                             <MDBCardBody>
                                 <MDBRow>
                                     <MDBCol sm="3">
-                                        <MDBCardText>Full Name</MDBCardText>
+                                        <MDBCardText>Name</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                        <MDBCardText className="text-muted">Shehan Ruwanga</MDBCardText>
+                                        <MDBCardText className="text-muted">{user_name}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
                                 <hr />
@@ -98,7 +87,7 @@ function UserProfile() {
                                         <MDBCardText>Email</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                        <MDBCardText className="text-muted">Shehan@gmail.com</MDBCardText>
+                                        <MDBCardText className="text-muted">{user_email}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
                                 <hr />
@@ -107,16 +96,7 @@ function UserProfile() {
                                         <MDBCardText>Phone</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                        <MDBCardText className="text-muted">011 234-5678</MDBCardText>
-                                    </MDBCol>
-                                </MDBRow>
-                                <hr />
-                                <MDBRow>
-                                    <MDBCol sm="3">
-                                        <MDBCardText>Mobile</MDBCardText>
-                                    </MDBCol>
-                                    <MDBCol sm="9">
-                                        <MDBCardText className="text-muted">075 765-4321</MDBCardText>
+                                        <MDBCardText className="text-muted">{user_contact}</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
                                 <hr />
@@ -125,7 +105,16 @@ function UserProfile() {
                                         <MDBCardText>Address</MDBCardText>
                                     </MDBCol>
                                     <MDBCol sm="9">
-                                        <MDBCardText className="text-muted">Polonnaruwa / Sri Lanka</MDBCardText>
+                                        <MDBCardText className="text-muted">{user_address}</MDBCardText>
+                                    </MDBCol>
+                                </MDBRow>
+                                <hr />
+                                <MDBRow>
+                                    <MDBCol sm="3">
+                                        <MDBCardText>Account status</MDBCardText>
+                                    </MDBCol>
+                                    <MDBCol sm="9">
+                                        <MDBCardText className="text-muted">Active</MDBCardText>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>
@@ -157,20 +146,21 @@ function UserProfile() {
                             <MDBCol md="6">
                                 <MDBCard className="mb-4 mb-md-0">
                                     <MDBCardBody>
-                                        <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Harvest Published</span> </MDBCardText>
+                                        <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">My Published Harvests</span> </MDBCardText>
                                         <Table>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Amount</th>
+                                                <th>Category</th>
+                                                <th>Quantity</th>
                                             </tr>
-                                            <tr>
-                                                <td>Rice</td>
-                                                <td>100Kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Carrot</td>
-                                                <td>50Kg</td>
-                                            </tr>
+                                            {harvest.map((e,id)=>(
+                                                <tr key = {id}>
+                                                    <td>{e.name}</td>
+                                                    <td>{e.category}</td>
+                                                    <td>{e.quantity}{e.measurement_unit}</td>
+                                                </tr>
+                                            ))
+                                            }
                                         </Table>
                                     </MDBCardBody>
                                 </MDBCard>
