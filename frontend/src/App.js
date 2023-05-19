@@ -20,8 +20,8 @@ import LoanForm from './pages/Loan/LoanForm';
 import LoanRequests from './pages/Admin/LoanRequests';
 import UserProfile from './pages/HarvestHandling/FarmerProfile';
 import HarvestCart from './pages/HarvestHandling/harvestCart';
+import FertlizerCart from './pages/FertilizerOrder/fertilizerCart';
 import Checkout from './pages/Payment';
-import Success from './pages/User/Success';
 import Card from './pages/User/Card';
 
 function App() {
@@ -46,11 +46,11 @@ function App() {
         <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
         <Route exact path="/HarvestCart" element={<HarvestCart />} />
+        <Route exact path="/FertilizerCart" element={<FertlizerCart />} />
         <Route exact path="/LoanForm" element={<LoanForm />} /> 
         {userRole === "Farmer" && <Route exact path="/AdminDash" element={<AdminDash />} />}
         <Route exact path="/RequestedLoans" element={<LoanRequests />} /> 
         <Route exact path="/MyProfile" element={<UserProfile />} /> 
-        <Route exact path="/Success" element={<Success />} /> 
         <Route exact path="/Card" element={<Card />} /> 
         <Route exact path="/Checkout" element={<Checkout />} /> 
       </Routes>

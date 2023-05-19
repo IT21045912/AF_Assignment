@@ -101,6 +101,23 @@ const deleteCartItem = async (req, res) => {
   }
 };
 
+const deleteUserCart = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const result = await Cart.deleteMany({ added_by: userId });
+    if (result.deletedCount > 0) {
+      return res.status(200).json({
+        message: "Cart deleted successfully",
+      });
+    } else {
+      return res.status(404).json({ message: "No items found for the user" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+};
+
+
 const checkout = async (req, res) => {
   const items = req.body;
   console.log('Items:', items);
@@ -129,4 +146,4 @@ const checkout = async (req, res) => {
 
 
 
-module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem, checkout };
+module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem, checkout, deleteUserCart };

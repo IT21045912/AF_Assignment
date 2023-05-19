@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import axios from "axios";
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCol,
@@ -9,49 +10,67 @@ import {
   MDBInput,
   MDBRow,
 } from "mdb-react-ui-kit";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import axios from "axios";
 
 export default function Checkout() {
-    const location = useLocation();
-    const price = location.state.props
-    const tot = price.totalPrice
-    const [customer,setcustomer] = useState();
-    const [currency ,setCurrency] = useState("LKR");
-    const [cardNumber,setCardNumber] = useState();
-    const [expMonth,setexpMonth] = useState();
-    const [expYear ,setexpyear] = useState();
-    const [ccv ,setcvv] = useState();
-    const navigate = useNavigate();
-    const amount = location.state?.props;
+  const location = useLocation();
+  const amount = location.state?.props;
 
+  const [customer, setCustomer] = useState("");
+  const [currency, setCurrency] = useState("LKR");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expMonth, setExpMonth] = useState("");
+  const [expYear, setExpYear] = useState("");
+  const [ccv, setCcv] = useState("");
 
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
-const Submit = (e) => {
+  const user = localStorage.getItem("uid");
+  const name = localStorage.getItem("Name");
+
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const placeOrder = (e) => {
     e.preventDefault();
-
-    const data = {
-        customer,
-        amount,
-        currency,
-        cardNumber,
-        expMonth ,
-        expYear,
-        ccv
-    }
-
-    axios.post(`http://localhost:3030/api/buy/pay/card`,data).then((res) => {
-    console.log(res.data);
-
-    navigate('/Success');
-      
-  })
-}
-
-const placeOrder = (e) => {
-  
-}
+    axios
+      .get(`http://localhost:1337/api/cart-controller/all/${user}`, config)
+      .then((res) => {
+        const itemNames = res.data.Carts.map((cart) => cart.itemName);
+        setCart(itemNames);
+        console.log(itemNames);
+        if (res.status === 200) {
+          const orderData = new FormData();
+          orderData.append("Items", cart);
+          orderData.append("placedBy", name);
+          orderData.append("amount", amount);
+          orderData.append("status", "Order Placed");
+          axios.post("http://localhost:1337/api/order-controller/", orderData)
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => {
+              alert(err);
+              return;
+            });
+          axios.delete(`http://localhost:1337/api/cart-controller/deletecart/${user}`)
+            .then((res) => {
+            console.log(res.data);
+            alert("Order Placed Successfully!")
+          })
+          .catch((err) => {
+            alert(err);
+            return;
+          });
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        return;
+      });
+  };
 
   return (
     <MDBContainer
@@ -62,32 +81,36 @@ const placeOrder = (e) => {
           "url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp)",
       }}
     >
-      <MDBRow className=" d-flex justify-content-center">
+      <MDBRow className="d-flex justify-content-center">
         <MDBCol md="10" lg="8" xl="5">
           <MDBCard className="rounded-3">
             <MDBCardBody className="p-4">
               <div className="text-center mb-4">
                 <h3>Rs.{amount}.00</h3>
                 <h6>Payment</h6>
-              <div className="">
+                <div className="">
                   <img
                     className="img-fluid"
                     src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
+                    alt="Mastercard Logo"
                   />
-                <img
-                  className="img-fluid"
-                  src="https://img.icons8.com/color/48/000000/visa.png"
-                />
+                  <img
+                    className="img-fluid"
+                    src="https://img.icons8.com/color/48/000000/visa.png"
+                    alt="Visa Logo"
+                  />
+                </div>
               </div>
-              </div>
-              <div className="d-flex flex-row align-items-center mb-4 pb-1">
-              </div>
+              <div className="d-flex flex-row align-items-center mb-4 pb-1"></div>
               <MDBInput
                 label="Cardholder's Name"
                 id="form3"
                 type="text"
                 size="lg"
-                    value={customer} onChange={(e) => {setcustomer(e.target.value)}}
+                value={customer}
+                onChange={(e) => {
+                  setCustomer(e.target.value);
+                }}
               />
               <MDBRow className="my-4">
                 <MDBCol size="7">
@@ -96,7 +119,10 @@ const placeOrder = (e) => {
                     id="form4"
                     type="text"
                     size="lg"
-                    value={cardNumber} onChange={(e) => {setCardNumber(e.target.value)}}
+                    value={cardNumber}
+                    onChange={(e) => {
+                      setCardNumber(e.target.value);
+                    }}
                   />
                 </MDBCol>
                 <MDBCol size="2">
@@ -106,7 +132,10 @@ const placeOrder = (e) => {
                     type="text"
                     size="lg"
                     placeholder={expMonth}
-                    value={expMonth} onChange={(e) => {setexpMonth(e.target.value)}}
+                    value={expMonth}
+                    onChange={(e) => {
+                      setExpMonth(e.target.value);
+                    }}
                   />
                 </MDBCol>
                 <MDBCol size="2">
@@ -115,7 +144,10 @@ const placeOrder = (e) => {
                     id="form5"
                     type="text"
                     size="lg"
-                    value={expYear} onChange={(e) => {setexpyear(e.target.value)}}
+                    value={expYear}
+                    onChange={(e) => {
+                      setExpYear(e.target.value);
+                    }}
                   />
                 </MDBCol>
                 <MDBCol size="2">
@@ -125,11 +157,20 @@ const placeOrder = (e) => {
                     type="text"
                     size="lg"
                     placeholder={ccv}
-                    value={ccv} onChange={(e) => {setcvv(e.target.value)}}
+                    value={ccv}
+                    onChange={(e) => {
+                      setCcv(e.target.value);
+                    }}
                   />
                 </MDBCol>
               </MDBRow>
-              <Button  onClick={placeOrder()} variant="success" size="lg">Pay</Button>
+              <Button
+                onClick={placeOrder}
+                variant="success"
+                size="lg"
+              >
+                Pay
+              </Button>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

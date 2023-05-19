@@ -3,26 +3,28 @@ const { Schema } = mongoose;
 
 const OrderSchema = new Schema(
   {
-    item_id: {
+    Items:{
+      type:Array,
+      required:true
+    },
+    placedBy: {
       type: String,
-      required: true,
+      required: true
+    },
+    amount: {
+      type: Number,
+      required: true
     },
     status: {
-      type: Boolean,
-      required: true,
-    },
-    order_placed_by: {
       type: String,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-module.exports = mongoose.model('Order', OrderSchema);
+const Order = mongoose.model('Order', OrderSchema);
+module.exports = Order;
+
