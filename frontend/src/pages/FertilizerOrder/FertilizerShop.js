@@ -53,19 +53,17 @@ function ShowAllFertilizer() {
   return (
     <>
       <div classname={classes.root} style={{ padding: "15px" }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-          <Form.Control
-            type="search"
-            value={search}
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-            onChange={(e) => { setSearch(e.target.value) }}
-            style={{ width: '50%', height: '40px' }}
 
-          />
-          <Button>Search</Button>
-        </div>
+        <Form.Control
+          type="search"
+          value={search}
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+          onChange={(e) => { setSearch(e.target.value) }}
+
+        />
+        <Button style={{ margin: "10px" }}>Search</Button>
         <Grid container spacing={3}>
           {fertilizer.filter((e) => {
             if (search === "") {
@@ -88,7 +86,7 @@ function ShowAllFertilizer() {
                   <span style={{ fontFamily: 'Copperplate Gothic Light', fontSize: '23px', fontWeight: 'bold' }}>{e.name}</span>
                   <p style={{ fontFamily: 'Impact', fontSize: '23px', fontWeight: 'bold' }}>Rs.{e.unit_price} per {e.measurement_unit}</p>
                   <div style={{ height: '10%' }}>
-                    <p>Contents :- {e.contents.substring(0, 70) + '...'}</p>
+                    <p>Contents :- {e.contents}</p>
                   </div>
                 </CardContent>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
