@@ -32,9 +32,9 @@ function ShowAllFertilizer() {
     const config = {
       headers: { 'Authorization': `Bearer ${token}` }
     };
-    axios.get('http://localhost:1337/api/fertilzer-controller', config)
+    axios.get('http://localhost:1337/api/fertilzer-controller/')
       .then((res) => {
-        setFertilizer(res.data.Fertlizers);
+        setFertilizer(res.data.Fertilizers);
         console.log(fertilizer)
       })
       .catch((err) => {

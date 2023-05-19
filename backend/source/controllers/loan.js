@@ -133,6 +133,38 @@ const getPendingLoans = (req, res, next) => {
     });
 };
 
+// const deleteLoanById = async (req, res) => {
+//   const id = req.params.id;
+  
+//   try {
+//     const loan = await Loan.findById(id);
+//     if (loan) {
+//       await Loan.findByIdAndRemove(id);
+//       return res.status(200).json({ message: "Loan deleted successfully" });
+//     } else {
+//       return res.status(404).json({ message: "Loan not found" });
+//     }
+//   } catch (err) {
+//     return res.status(500).json({ error: err });
+//   }
+// }
+const deleteLoanById = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const loan = await Loan.findOneById(id);
+    if (loan) {
+      await loan.deleteOne();
+      return res.status(200).json({ "message": "Loan deleted successfully" });
+    } else {
+      return res.status(404).json({ "message": "Loan not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ "error": err });
+  }
+};
+
+
 module.exports = {
   getApprovedLoans,
   getPendingLoans,
@@ -140,5 +172,6 @@ module.exports = {
   getAllLoans,
   getLoanById,
   updateLoan,
-  updateLoanTrue
+  updateLoanTrue,
+  deleteLoanById
 };

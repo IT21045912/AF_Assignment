@@ -3,33 +3,29 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/esm/Button'
 import Container from 'react-bootstrap/esm/Container'
 import Table from 'react-bootstrap/esm/Table'
+import { useNavigate } from 'react-router-dom';
 
 function LoanRequests() {
 
     const [loans, setLoans] = useState([]);
     const [Aloans, setALoans] = useState([]);
+    const navigate = useNavigate();
     const token = localStorage.getItem("Token")
     const config = {
         headers: { 'Authorization': `Bearer ${token}` }
     };
-    // useEffect(() => {
-    //     axios.get(`http://localhost:1337/api/loan-controller//approved-loans`, config).then((res) => {
-    //         // console.log("first", res.data)
-    //         setALoans(res.data.Loans)
-    //         console.log(Aloans);
+    useEffect(() => {
+        axios.get('http://localhost:1337/api/loan-controller/approved-loans', config)
+            .then(response => {
+                setALoans(response.data.loans)
+                // console.log(Aloans);
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
-    //     }).catch(err => {
-    //         alert(err)
-    //     })
-    // }, [])
-    // axios.get('http://localhost:1337/api/loan-controller/approved-loans',config)
-    //     .then(response => {
-    //         setALoans(response.data)
-    //         console.log(Aloans);
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
+    }, [])
+
 
     useEffect(() => {
         axios.get(`http://localhost:1337/api/loan-controller/`, config).then((res) => {
@@ -42,10 +38,27 @@ function LoanRequests() {
         })
     }, [])
 
-    const updateDetails = (e) => {
+    const ApproveLoan = (e) => {
         const id = e._id
         console.log(id);
         axios.put(`http://localhost:1337/api/loan-controller/Update/${id}`)
+    }
+    const DeleteLoan = (e) => {
+        const id = e._id
+        console.log(id);
+        axios.delete(`http://localhost:1337/api/loan-controller/Delete/${id}`)
+        navigate(0);
+    }
+    const UpdateApproveLoan = (e) => {
+        const id = e._id
+        console.log(id);
+        axios.put(`http://localhost:1337/api/loan-controller/Update/${id}`)
+    }
+    const DeleteApproveLoan = (e) => {
+        const id = e._id
+        console.log(id);
+        axios.delete(`http://localhost:1337/api/loan-controller/Delete/${id}`)
+        navigate(0);
     }
     return (
         <Container style={{ backgroundColor: 'white', width: '100%', marginTop: '20px', padding: '20px', borderRadius: '15px' }}>
@@ -54,8 +67,8 @@ function LoanRequests() {
                 Admin Dashboard
             </center>
             </h1>
-            
-            <h2>Loan Requests</h2>            
+
+            <h2>Loan Requests</h2>
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1, padding: "10px" }}>
                     <h2>Pending Loans</h2>
@@ -80,8 +93,8 @@ function LoanRequests() {
                                     <td>Rs.{elem.amount}</td>
                                     <td>{elem.time}</td>
                                     <td>
-                                        <Button variant="outline-primary" onClick={() => { updateDetails(elem) }}>Approve</Button>
-                                        <Button variant="outline-danger" onClick={() => { updateDetails(elem) }} style={{ marginLeft: "10px" }}>Reject</Button>
+                                        <Button variant="outline-primary" onClick={() => { ApproveLoan(elem) }}>Approve</Button>
+                                        <Button variant="outline-danger" onClick={() => { DeleteLoan(elem) }} style={{ marginLeft: "10px" }}>Reject</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -104,19 +117,18 @@ function LoanRequests() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {Aloans.map((elem, id) => ( */}
-                            <tr style={{ textAlign: 'center', fontWeight: '400' }}>
-                                <td>Shehan</td>
-                                <td>Buy New Tractor</td>
-                                <td>Need Within 1 Week</td>
-                                <td>Rs.250,000,000</td>
-                                <td>2025-02-16</td>
+                        {Aloans.map((elem, id) => (
+                            <tr key={id} style={{ textAlign: 'center', fontWeight: '400' }}>
+                                <td>{elem.requested_by}</td>
+                                <td>{elem.reason}</td>
+                                <td>{elem.special_notice}</td>
+                                <td>Rs.{elem.amount}</td>
+                                <td>{elem.time}</td>
                                 <td>
-                                    <Button variant="outline-primary" >Update</Button>
-                                    <Button variant="outline-danger" style={{ marginLeft: "10px" }}    >Delete</Button>
+                                    <Button variant="outline-danger" onClick={() => { DeleteApproveLoan(elem) }} style={{ marginLeft: "10px" }}>Reject</Button>
                                 </td>
                             </tr>
-                        {/* ))} */}
+                        ))}
                     </tbody>
                 </Table>
             </div>
