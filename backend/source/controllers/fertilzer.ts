@@ -97,22 +97,50 @@ const getFertlizerById = (async (req: Request, res: Response) => {
 })
 
 
-const updateFertlizer = (async (req: Request, res: Response) => {
-    const id = req.params.id;
-    return await Fertlizer.findById(id).then((Fertlizer) => {
-        if (Fertlizer) {
-            return Fertlizer.set(req.body).save().then((Fertlizer) => {
-                return res.status(201).json({ Fertlizer })
-            }).catch(err => {
-                return res.status(500).json({ error: err })
-            })
-        } else {
-            return res.status(404).json({ "message": "Fertlizer not found" })
-        }
-    }).catch(err => {
-        return res.status(500).json({ "error": err })
-    })
-})
+// const updateFertlizer = (async (req: Request, res: Response) => {
+//     const id = req.params.id;
+//     return await Fertlizer.findById(id).then((Fertlizer) => {
+//         if (Fertlizer) {
+//             return Fertlizer.set(req.body).save().then((Fertlizer) => {
+//                 return res.status(201).json({ Fertlizer })
+//             }).catch(err => {
+//                 return res.status(500).json({ error: err })
+//             })
+//         } else {
+//             return res.status(404).json({ "message": "Fertlizer not found" })
+//         }
+//     }).catch(err => {
+//         return res.status(500).json({ "error": err })
+//     })
+// })
+
+const updateFertlizer = async (req: Request, res: Response) => {
+    const id = req.body.id;
+    const {
+        unit_price,
+        name,
+        contents,
+        measurement_unit,
+    } = req.body;
+
+    console.log("id==> ", id);
+
+    const newFertilizer = {
+        unit_price,
+        name,
+        contents,
+        measurement_unit,
+    };
+
+    await Fertlizer
+        .findByIdAndUpdate(id, newFertilizer)
+        .then(() => {
+            res.status(200).send({ state: "Update", date: newFertilizer });
+        })
+        .catch((err) => {
+            res.status(400).send({ state: err });
+        })
+};
 
 const deleteFertlizer = async (req: Request, res: Response) => {
     const id = req.params.id;

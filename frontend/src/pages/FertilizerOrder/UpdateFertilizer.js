@@ -32,9 +32,26 @@ function AddFertilizer() {
     }, [])
 
     const Validate = (e) => {
-        // e.preventDefault();
+        e.preaventDefault();
 
-        // const
+        const formData = {
+            FertilizerName,
+            Contents,
+            MeasurementUnit,
+            Price,
+            id
+        }
+
+        console.log("From dta: :", formData);
+
+        axios.put(`http://localhost:1337/api/fertilzer-controller/updateFertiizer/${e}`).then((res) => {
+            // axios.put('http://localhost:1337/api/fertilzer-controller/updateFertiizer').then((res) => {
+            alert("fertilizer updated successfully!!!")
+            console.log("res.data==>", res.state);
+            navigate(-1);
+        }).catch(err => {
+            alert(err);
+        })
 
     }
 
