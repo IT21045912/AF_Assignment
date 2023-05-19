@@ -53,7 +53,7 @@ function Home() {
                     />
                     <CardContent style={{ backgroundColor: 'black' }}>
                       <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
-                        Harvest To Sale
+                        Add Harvest To Sell
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -109,7 +109,7 @@ function Home() {
                     />
                     <CardContent style={{ backgroundColor: 'black' }}>
                       <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
-                        Pulished Harvest
+                        Handle My Pulished Harvests
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -118,7 +118,7 @@ function Home() {
             </Grid>
             <Grid item xs={6} md={4} style={{ height: '80%' }}>
               <Card>
-                <Link to=''>
+                <Link to='/LoanForm'>
                   <CardActionArea>
                     <img
                       src={money}
@@ -127,7 +127,7 @@ function Home() {
                     />
                     <CardContent style={{ backgroundColor: 'black' }}>
                       <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
-                        Raise Concern/Loans
+                        Get Financial Aid
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -145,7 +145,7 @@ function Home() {
                     />
                     <CardContent style={{ backgroundColor: 'black' }}>
                       <Typography gutterBottom variant="h5" component="h2" style={{ color: 'white', textAlign: 'center' }}>
-                        Harvest shop
+                        Visit the Harvest shop
                       </Typography>
                     </CardContent>
                   </CardActionArea>

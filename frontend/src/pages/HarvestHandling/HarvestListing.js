@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,7 +22,7 @@ function HarvestListing() {
     const classes = useStyles();
     const [search, setSearch] = useState("")
     const [harvest, setHarvest] = useState([]);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const token = localStorage.getItem("Token");
 
@@ -49,8 +49,8 @@ function HarvestListing() {
         })
     }
 
-    const updateHarvest = (data) => {
-        navigate('/HarvestUpdate', { state: { data: data } })
+    const updateHarvest = () => {
+
     }
 
     return (

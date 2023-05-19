@@ -15,10 +15,20 @@ import Fertilizer from './pages/FertilizerOrder/Fertilizer';
 import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
 import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
 import HarvestListing from './pages/HarvestHandling/HarvestListing';
+import HarvestCart from './pages/HarvestHandling/harvestCart';
 import Updateharvest from './pages/HarvestHandling/Updateharvest';
 
+import AdminDash from './pages/Admin/AdminDash';
+import LoanForm from './pages/Loan/LoanForm';
+import LoanRequests from './pages/Admin/LoanRequests';
+import UserProfile from './pages/User/UserProfile';
+import Cart from './pages/User/Cart';
+import Success from './pages/User/Success';
+import Card from './pages/User/Card';
 
 function App() {
+  const userRole = localStorage.getItem("Role");
+  console.log(userRole);
   return (
     <>
       <NavBar />
@@ -37,6 +47,15 @@ function App() {
         <Route exact path="/FertilizerViewPage" element={<ViewFertilizer />} />
         <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
+        <Route exact path="/HarvestCart" element={<HarvestCart />} />
+        <Route exact path="/LoanForm" element={<LoanForm />} />
+        <Route exact path="/AdminDash" element={<AdminDash />} />
+        {/* {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />} */}
+        <Route exact path="/RequestedLoans" element={<LoanRequests />} />
+        <Route exact path="/UserProfile" element={<UserProfile />} />
+        <Route exact path="/Cart" element={<Cart />} />
+        <Route exact path="/Success" element={<Success />} />
+        <Route exact path="/Card" element={<Card />} />
         <Route exact path="/HarvestUpdate" element={<Updateharvest />} />
       </Routes>
     </>
