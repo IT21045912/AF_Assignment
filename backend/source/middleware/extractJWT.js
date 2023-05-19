@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-import config from '../config/config';
-import logging from '../config/logging';
+const logging = require('../config/logging');
+const config = require('../config/config');
 
 const NAMESPACE = 'Auth';
 

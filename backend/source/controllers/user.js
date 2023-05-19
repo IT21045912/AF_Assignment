@@ -1,6 +1,6 @@
+const logging = require('../config/logging');
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
-const logging = require('../config/logging');
 const User = require('../models/user');
 const signJWT = require('../functions/signJTW');
 

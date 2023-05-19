@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const logging = require('../config/logging');
 const Order = require('../models/order');
 
 const NAMESPACE = 'Order';

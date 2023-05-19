@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const logging = require('../config/logging');
 const Loan = require('../models/loan');
 
 const NAMESPACE = 'Loan';
