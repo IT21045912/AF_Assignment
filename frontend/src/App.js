@@ -15,11 +15,13 @@ import Fertilizer from './pages/FertilizerOrder/Fertilizer';
 import ViewFertilizer from './pages/FertilizerOrder/ViewFertilizer';
 import UpdateFertilizer from './pages/FertilizerOrder/UpdateFertilizer';
 import HarvestListing from './pages/HarvestHandling/HarvestListing';
+import HarvestCart from './pages/HarvestHandling/harvestCart';
+import Updateharvest from './pages/HarvestHandling/Updateharvest';
+
 import AdminDash from './pages/Admin/AdminDash';
 import LoanForm from './pages/Loan/LoanForm';
 import LoanRequests from './pages/Admin/LoanRequests';
 import UserProfile from './pages/HarvestHandling/FarmerProfile';
-import HarvestCart from './pages/HarvestHandling/harvestCart';
 import FertlizerCart from './pages/FertilizerOrder/fertilizerCart';
 import Checkout from './pages/HarvestHandling/Payment';
 import CheckoutFtz from './pages/FertilizerOrder/PaymentFtz';
@@ -48,13 +50,14 @@ function App() {
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
         <Route exact path="/HarvestCart" element={<HarvestCart />} />
         <Route exact path="/FertilizerCart" element={<FertlizerCart />} />
-        <Route exact path="/LoanForm" element={<LoanForm />} /> 
-        {userRole === "Farmer" && <Route exact path="/AdminDash" element={<AdminDash />} />}
-        <Route exact path="/RequestedLoans" element={<LoanRequests />} /> 
-        <Route exact path="/MyProfile" element={<UserProfile />} /> 
-        <Route exact path="/Card" element={<Card />} /> 
-        <Route exact path="/Checkout" element={<Checkout />} /> 
+        <Route exact path="/LoanForm" element={<LoanForm />} />
+        {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />}
+        <Route exact path="/RequestedLoans" element={<LoanRequests />} />
+        <Route exact path="/MyProfile" element={<UserProfile />} />
+        <Route exact path="/Card" element={<Card />} />
+        <Route exact path="/Checkout" element={<Checkout />} />
         <Route exact path="/CheckoutFtz" element={<CheckoutFtz />} />
+        <Route exact path="/HarvestUpdate" element={<Updateharvest />} />
       </Routes>
     </>
   );

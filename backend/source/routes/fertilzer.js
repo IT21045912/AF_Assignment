@@ -5,8 +5,8 @@ const extractJWT = require('../middleware/extractJWT');
 const router = express.Router();
 
 router.post('/', controller.createFertilizer);
-router.get('/:id',  controller.getFertilizerById);
-router.put('/:id', controller.updateFertilizer);
+router.get('/:id', controller.getFertilizerById);
+router.put('/', controller.updateFertilizer);
 router.get('/', controller.getAllFertilizers);
 router.delete('/:id', controller.deleteFertilizer);
 

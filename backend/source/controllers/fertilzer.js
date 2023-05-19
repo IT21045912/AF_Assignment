@@ -92,36 +92,41 @@ const getFertilizerById = async (req, res) => {
 
   
 
-const updateFertilizer = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const Fertilizer = await Fertilizer.findById(id);
-        if (Fertilizer) {
-            Fertilizer.set(req.body);
-            const updatedFertilizer = await Fertilizer.save();
-            return res.status(201).json({ Fertilizer: updatedFertilizer });
-        } else {
-            return res.status(404).json({ "message": "Fertilizer not found" });
-        }
-    } catch (err) {
-        return res.status(500).json({ "error": err });
-    }
-};
-
 const deleteFertilizer = async (req, res) => {
     const id = req.params.id;
-    try {
-        const Fertilizer = await Fertilizer.findById(id);
-        if (Fertilizer) {
-            await Fertilizer.deleteOne();
-            return res.status(200).json({ "message": "Fertilizer deleted successfully" });
-        } else {
-            return res.status(404).json({ "message": "Fertilizer not found" });
-        }
-    } catch (err) {
-        return res.status(500).json({ "error": err });
-    }
+    await Fertilizer.findByIdAndDelete(id).then(() => {
+        res.status(200).send({ state: "Success" });
+    }).catch((err) => {
+        res.status(400).send({ send: err });
+    })
 };
+
+const updateFertilizer = async (req, res) => {
+    const id = req.body.id;
+    const {
+        unit_price,
+        name,
+        contents,
+        measurement_unit,
+    } = req.body;
+
+    console.log("ID: ", id);
+
+    const newFertilizer = {
+        unit_price,
+        name,
+        contents,
+        measurement_unit,
+    };
+
+    await Fertilizer.findByIdAndUpdate(id, newFertilizer).then(() => {
+        res.status(200).send({ state: "Update", data: newFertilizer });
+    }).catch((err) => {
+        res.status(400).send({ state: err });
+    })
+
+};
+
 
 module.exports = {
     createFertilizer,

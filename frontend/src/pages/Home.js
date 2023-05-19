@@ -37,6 +37,8 @@ function Home() {
   const name = localStorage.getItem('Name');
   console.log(name);
   const classes = useStyles();
+  const userRole = localStorage.getItem("Role")
+
   return (
     <>
       <Container style={{ backgroundColor: 'white', width: '100%', marginTop: '15px', padding: '15px', borderRadius: '10px' }}>

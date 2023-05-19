@@ -89,10 +89,13 @@ function FarmerRegister() {
     <Container
       fluid
       style={{
-        marginTop: "4%",
+        marginTop: "5%",
         display: "block",
-        width: "76%",
+        width: "65%",
         justifyContent: "center",
+        backgroundColor: 'white',
+        marginBottom: '5%',
+        borderRadius: '10px'
       }}
     >
       <div className={classes.root}>

@@ -23,8 +23,10 @@ function NavBar() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/FertilizerAdmin">Farmer</Nav.Link>
+                        {/* <Nav.Link href="/">Home</Nav.Link> */}
+                        {(userRole === "Admin" || userRole === "Farmer") && < Nav.Link href="/">Home</Nav.Link>}
+                        {/* <Nav.Link href="/FertilizerAdmin">Farmer</Nav.Link> */}
+                        {userRole === "Admin" && <Nav.Link href="/FertilizerAdmin">Fertilizer</Nav.Link>}
                         {userRole === "Admin" && <Nav.Link href="/AdminDash">Admin</Nav.Link>}
 
                     </Nav>
@@ -40,7 +42,7 @@ function NavBar() {
                     </Form>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+        </Navbar >
     );
 }
 

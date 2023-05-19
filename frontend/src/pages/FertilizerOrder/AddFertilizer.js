@@ -83,9 +83,11 @@ function AddFertilizer() {
           <Form.Label>Enter image: </Form.Label>
           <Form.Control type="file" accept='image/*' onChange={(e) => { fileUpload(e) }} required />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Publish for Sale
-        </Button>
+        <center>
+          <Button variant="primary" type="submit" style={{ width: '50%' }}>
+            Publish for Sale
+          </Button>
+        </center>
         <ToastContainer
           position="top-center"
           autoClose={5000}

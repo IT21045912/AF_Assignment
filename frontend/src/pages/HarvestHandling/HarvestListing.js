@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/esm/Button';
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table'
-// import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +22,7 @@ function HarvestListing() {
     const classes = useStyles();
     const [search, setSearch] = useState("")
     const [harvest, setHarvest] = useState([]);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const token = localStorage.getItem("Token");
     const user = localStorage.getItem("Name");
@@ -43,15 +43,15 @@ function HarvestListing() {
     }, [harvest])
 
     const deleteHarvest = (e) => {
-        axios.delete(`http://localhost:1337/api/harvest-controller/deleteHarvest/${e}`).then(re => {
+        axios.delete(`http://localhost:1337/api/harvest-controller/${e}`).then(res => {
             toast.success('Harvest Item Is Deleted Successfuly!!')
         }).catch(err => {
             alert(err)
         })
     }
 
-    const updateHarvest = () => {
-
+    const updateHarvest = (data) => {
+        navigate("/HarvestUpdate", { state: { data: data } })
     }
 
     return (

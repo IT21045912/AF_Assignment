@@ -90,15 +90,17 @@ function AddHarvest() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Quantity :</Form.Label>
-          <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setQuantity(e.target.value) }} />
+          <Form.Control type="Number" placeholder="Quantity" onChange={(e) => { setQuantity(e.target.value) }} />
         </Form.Group>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Enter product image: </Form.Label>
           <Form.Control type="file" accept='image/*' required onChange={(e) => { fileUpload(e) }} />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Publish for Sale
-        </Button>
+        <center>
+          <Button variant="primary" type="submit" style={{ width: '50%' }}>
+            Publish for Sale
+          </Button>
+        </center>
         <ToastContainer
           position="top-center"
           autoClose={5000}
