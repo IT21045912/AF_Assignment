@@ -32,7 +32,7 @@ function ViewFertilizer() {
         };
 
         axios.get('http://localhost:1337/api/fertilzer-controller', config).then((res) => {
-            setFertilizer(res.data.Fertlizers);
+            setFertilizer(res.data.Fertilizers);
             console.log("Fertilizers:: ", fertilizer);
         }).catch((err) => {
             alert(err);
@@ -42,7 +42,7 @@ function ViewFertilizer() {
     }, [fertilizer])
 
     const deleteFertilizer = (e) => {
-        axios.delete(`http://localhost:1337/api/fertilzer-controller/deleteFertilizer/${e}`).then(res => {
+        axios.delete(`http://localhost:1337/api/fertilzer-controller/${e}`).then(res => {
             toast.error('Product Is Deleted Successfuly!!')
         }).catch(err => {
             alert(err)
@@ -79,6 +79,7 @@ function ViewFertilizer() {
                             <th>Measurement unit</th>
                             <th>Unit price</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,11 +93,13 @@ function ViewFertilizer() {
                             <tr key={id} style={{ textAlign: 'center', fontWeight: 'bold' }}>
                                 <td>{id + 1}</td>
                                 <td>{elem.name}</td>
-                                <td>{elem.contents}</td>
+                                <td>{elem.contents.substring(0, 250) + '...'}</td>
                                 <td>{elem.measurement_unit}</td>
                                 <td>{elem.unit_price}</td>
                                 <td>
                                     <Button variant="outline-primary" size="sm" onClick={() => { updateFertilizer(elem) }} >Edit</Button>
+                                </td>
+                                <td>
                                     <Button style={{ marginLeft: "10px" }} variant="outline-danger" size="sm" onClick={() => deleteFertilizer(elem._id)} >Delete</Button>
                                 </td>
                             </tr>

@@ -22,7 +22,6 @@ import AdminDash from './pages/Admin/AdminDash';
 import LoanForm from './pages/Loan/LoanForm';
 import LoanRequests from './pages/Admin/LoanRequests';
 import UserProfile from './pages/User/UserProfile';
-import HarvestCart from './pages/HarvestHandling/harvestCart';
 import Success from './pages/User/Success';
 import Card from './pages/User/Card';
 
@@ -53,7 +52,7 @@ function App() {
         {/* {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />} */}
         <Route exact path="/RequestedLoans" element={<LoanRequests />} />
         <Route exact path="/UserProfile" element={<UserProfile />} />
-        <Route exact path="/Cart" element={<Cart />} />
+        {/* <Route exact path="/Cart" element={<Cart />} /> */}
         <Route exact path="/Success" element={<Success />} />
         <Route exact path="/Card" element={<Card />} />
         <Route exact path="/HarvestUpdate" element={<Updateharvest />} />

@@ -24,6 +24,8 @@ function Login() {
   const [password, setpassword] = useState();
   const Navigate = useNavigate();
   const classes = useStyles();
+  const userRole = localStorage.getItem("Role")
+
 
   const Validate = (e) => {
     e.preventDefault();
@@ -40,7 +42,13 @@ function Login() {
         localStorage.setItem('Name', res.data.user.name);
         localStorage.setItem('Email', res.data.user.email);
         localStorage.setItem('Token', res.data.token);
-        Navigate("/")
+        if (userRole === "User") {
+          Navigate("/buyharvest")
+        } else {
+          Navigate("/")
+        }
+        // { userRole === "User" ? Navigate("/buyharvest") : Navigate("/") }
+
       })
       .catch((err) => {
         console.log(err);

@@ -7,10 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function AddFertilizer() {
 
-    const [FertilizerName, setFertilizerName] = useState();
-    const [Contents, setContents] = useState();
-    const [MeasurementUnit, setMeasurementUnit] = useState();
-    const [Price, setPrice] = useState();
+    const [name, setName] = useState();
+    const [contents, setContents] = useState();
+    const [measurement_unit, setMeasurementUnit] = useState();
+    const [unit_price, setPrice] = useState();
     const [id, setID] = useState();
 
     const location = useLocation();
@@ -19,38 +19,36 @@ function AddFertilizer() {
     useEffect(() => {
         try {
             const fertilizerData = location.state.data;
-            console.log("fertilizer data:::::: ", fertilizerData);
 
-            setFertilizerName(fertilizerData.name);
+            setName(fertilizerData.name);
             setContents(fertilizerData.contents);
             setMeasurementUnit(fertilizerData.measurement_unit);
             setPrice(fertilizerData.unit_price);
             setID(fertilizerData._id);
-        } catch (err) {
+        } catch (error) {
             navigate(-1);
         }
     }, [])
 
     const Validate = (e) => {
-        e.preaventDefault();
+        e.preventDefault();
 
         const formData = {
-            FertilizerName,
-            Contents,
-            MeasurementUnit,
-            Price,
+            name,
+            contents,
+            measurement_unit,
+            unit_price,
             id
         }
 
         console.log("From dta: :", formData);
 
-        axios.put(`http://localhost:1337/api/fertilzer-controller/updateFertiizer/${e}`).then((res) => {
-            // axios.put('http://localhost:1337/api/fertilzer-controller/updateFertiizer').then((res) => {
+        axios.put("http://localhost:1337/api/fertilzer-controller/", formData).then((res) => {
             alert("fertilizer updated successfully!!!")
-            console.log("res.data==>", res.state);
-            navigate(-1);
+            navigate("/FertilizerViewPage");
         }).catch(err => {
             alert(err);
+            console.log("this is a error")
         })
 
     }
@@ -71,18 +69,18 @@ function AddFertilizer() {
             }}
         >
             <h2>Edit the Fertilizer Details</h2>
-            <Form onSubmit={(e) => { Validate(e) }}>
+            <Form onSubmit={Validate}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name of fetilizer :</Form.Label>
-                    <Form.Control type="Name" placeholder="Name of Fertilizer.." value={FertilizerName} onChange={(e) => { setFertilizerName(e.target.value) }} />
+                    <Form.Control type="Name" placeholder="Name of Fertilizer.." value={name} onChange={(e) => { setName(e.target.value) }} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Contents :</Form.Label>
-                    <Form.Control type="Name" placeholder="Brief description of contents.." value={Contents} onChange={(e) => { setContents(e.target.value) }} />
+                    <Form.Control type="Name" placeholder="Brief description of contents.." value={contents} onChange={(e) => { setContents(e.target.value) }} />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Measurement Unit</Form.Label>
-                    <Form.Select onChange={(e) => { setMeasurementUnit(e.target.value) }} value={MeasurementUnit}>
+                    <Form.Select onChange={(e) => { setMeasurementUnit(e.target.value) }} value={measurement_unit}>
                         <option>--Select the unit--</option>
                         <option value='Kg'>Kg</option>
                         <option value='g'>g</option>
@@ -90,11 +88,13 @@ function AddFertilizer() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Unit Price (In LKR) :</Form.Label>
-                    <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }} value={Price} />
+                    <Form.Control type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }} value={unit_price} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Save
-                </Button>
+                <center>
+                    <Button variant="primary" type="submit" style={{ width: '30%' }}>
+                        Save
+                    </Button>
+                </center>
             </Form>
         </Container>
     )

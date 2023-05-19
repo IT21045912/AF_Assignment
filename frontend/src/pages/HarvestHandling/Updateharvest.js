@@ -7,11 +7,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function Updateharvest() {
 
-    const [ProduceName, setProduceName] = useState();
-    const [Category, setCategory] = useState();
-    const [MeasurementUnit, setMeasurementUnit] = useState();
-    const [Price, setPrice] = useState();
-    const [Quantity, setQuantity] = useState();
+    const [name, setProduceName] = useState();
+    const [category, setCategory] = useState();
+    const [measurement_unit, setMeasurementUnit] = useState();
+    const [unit_price, setPrice] = useState();
+    const [quantity, setQuantity] = useState();
     const [id, setID] = useState();
 
     const seller = localStorage.getItem("Name")
@@ -33,9 +33,28 @@ function Updateharvest() {
         } catch (err) {
             navigate(-1);
         }
-    })
+    }, [])
 
     const Validate = (e) => {
+        e.preventDefault();
+
+        const formData = {
+            name,
+            category,
+            measurement_unit,
+            unit_price,
+            quantity,
+            id
+        }
+
+        console.log("FormData:: ", formData);
+        axios.put("http://localhost:1337/api/harvest-controller/", formData).then((res) => {
+            alert("Harvest updated successfully!!!")
+            navigate("/harvestViewPage");
+        }).catch(err => {
+            alert(err);
+            console.log("this is a error")
+        })
 
     }
 
@@ -58,11 +77,11 @@ function Updateharvest() {
             <Form onSubmit={Validate}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name of Produce :</Form.Label>
-                    <Form.Control value={ProduceName} type="Name" placeholder="Name of Produce.." onChange={(e) => { setProduceName(e.target.value) }} />
+                    <Form.Control value={name} type="Name" placeholder="Name of Produce.." onChange={(e) => { setProduceName(e.target.value) }} />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Category</Form.Label>
-                    <Form.Select value={Category} onChange={(e) => { setCategory(e.target.value) }}>
+                    <Form.Select value={category} onChange={(e) => { setCategory(e.target.value) }}>
                         <option>--Select the category of produce--</option>
                         <option value='Fruits'>Fruits</option>
                         <option value='Vegetables'>Vegetables</option>
@@ -73,7 +92,7 @@ function Updateharvest() {
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Measurement Unit</Form.Label>
-                    <Form.Select value={MeasurementUnit} onChange={(e) => { setMeasurementUnit(e.target.value) }}>
+                    <Form.Select value={measurement_unit} onChange={(e) => { setMeasurementUnit(e.target.value) }}>
                         <option>--Select the unit--</option>
                         <option value='Kg'>Kg</option>
                         <option value='g'>g</option>
@@ -81,11 +100,11 @@ function Updateharvest() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Unit Price (In LKR) :</Form.Label>
-                    <Form.Control value={Price} type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }} />
+                    <Form.Control value={unit_price} type="Number" placeholder="Unit Price (In LKR).." onChange={(e) => { setPrice(e.target.value) }} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label >Quantity :</Form.Label>
-                    <Form.Control value={Quantity} type="Number" placeholder="Quantity" onChange={(e) => { setQuantity(e.target.value) }} />
+                    <Form.Control value={quantity} type="Number" placeholder="Quantity" onChange={(e) => { setQuantity(e.target.value) }} />
                 </Form.Group>
                 <center>
                     <Button variant="primary" type="submit" style={{ width: '50%' }}>
