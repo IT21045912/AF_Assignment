@@ -21,7 +21,8 @@ import LoanRequests from './pages/Admin/LoanRequests';
 import UserProfile from './pages/HarvestHandling/FarmerProfile';
 import HarvestCart from './pages/HarvestHandling/harvestCart';
 import FertlizerCart from './pages/FertilizerOrder/fertilizerCart';
-import Checkout from './pages/Payment';
+import Checkout from './pages/HarvestHandling/Payment';
+import CheckoutFtz from './pages/FertilizerOrder/PaymentFtz';
 import Card from './pages/User/Card';
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <Route exact path="/MyProfile" element={<UserProfile />} /> 
         <Route exact path="/Card" element={<Card />} /> 
         <Route exact path="/Checkout" element={<Checkout />} /> 
+        <Route exact path="/CheckoutFtz" element={<CheckoutFtz />} />
       </Routes>
     </>
   );

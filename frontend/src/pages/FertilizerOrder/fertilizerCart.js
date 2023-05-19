@@ -48,7 +48,7 @@ const checkout = () => {
   axios.post('http://localhost:1337/api/cart-controller/checkout/',items).then(async res => {
     console.log(res);
     const amount = res.data.totalAmount
-    navigate('/Checkout', { state: { props: amount } })
+    navigate('/CheckoutFtz', { state: { props: amount } })
 })
 }
 

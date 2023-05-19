@@ -131,11 +131,7 @@ function UserProfile() {
                                                 <th>Amount</th>
                                             </tr>
                                             <tr>
-                                                <td>Urea</td>
-                                                <td>10Kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Albert Solution</td>
+                                                <td>NPK</td>
                                                 <td>10Kg</td>
                                             </tr>
                                         </Table>
