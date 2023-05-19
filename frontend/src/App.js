@@ -22,7 +22,7 @@ import AdminDash from './pages/Admin/AdminDash';
 import LoanForm from './pages/Loan/LoanForm';
 import LoanRequests from './pages/Admin/LoanRequests';
 import UserProfile from './pages/User/UserProfile';
-import Cart from './pages/User/Cart';
+import HarvestCart from './pages/HarvestHandling/harvestCart';
 import Success from './pages/User/Success';
 import Card from './pages/User/Card';
 
