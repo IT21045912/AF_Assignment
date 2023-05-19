@@ -4,14 +4,14 @@ const Order = require('../models/order');
 const NAMESPACE = 'Order';
 
 const createOrder = async (req, res, next) => {
-  let { item_id, order_placed_by, status, quantity } = req.body;
+  let { Items, placedBy, amount, status } = req.body;
 
   const _Order = new Order({
     _id: new mongoose.Types.ObjectId(),
-    item_id,
-    order_placed_by,
-    status,
-    quantity
+    Items,
+    placedBy,
+    amount,
+    status
   });
 
   return _Order

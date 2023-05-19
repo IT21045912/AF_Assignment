@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/esm/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { MDBInput } from 'mdb-react-ui-kit';
-// import Image from "../../images/paddy.jpg"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,18 +45,22 @@ function ViewItems() {
   const [quantity, setQuantity] = useState();
 
 
+  const navigate = useNavigate();
   const token = localStorage.getItem("Token")
   const user = localStorage.getItem("uid")
   const config = {
     headers: { 'Authorization': `Bearer ${token}` }
   };
   useEffect(() => {
-    axios.get(`http://localhost:1337/api/fertilzer-controller/${ID}`, config).then((res) => {
-      setItem(res.data.Fertlizer);
-      console.log(item)
-    }).catch(err => {
-      alert(err)
-    })
+    axios.get(`http://localhost:1337/api/fertilzer-controller/${ID}`)
+      .then((res) => {
+        console.log("one",res.data)
+        setItem(res.data.fertilizer);
+        console.log("two",item); 
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }, []);
   const itemName = item.name;
   console.log(itemName);
@@ -80,10 +83,15 @@ function ViewItems() {
     })
   };
 
+  const GoToCart = () =>{
+    navigate("/FertilizerCart");
+  }
+
   const classes = useStyles();
 
   return (
     <>
+    <Button style={{ marginLeft: "10px" }} onClick={() => GoToCart()} variant="btn btn-info">🛒 My Cart</Button>
       <Container style={{ backgroundColor: 'white', width: '80%', marginTop: '20px', padding: '20px', borderRadius: '15px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2%' }}>
         </div>
