@@ -35,7 +35,7 @@ function HarvestCart() {
       alert(err)
       return 
     })
-  },[items]);
+  });
   
   const removeCart = (id) => {
     axios.delete(`http://localhost:1337/api/cart-controller/${id}`).then((res) => {
@@ -45,9 +45,11 @@ function HarvestCart() {
 }
  
 const checkout = () => {
-  axios.post('http://localhost:1337/api/cart-controller/checkout/',items).then((res) => {
+  axios.post('http://localhost:1337/api/cart-controller/checkout/',items).then(async res => {
     console.log(res);
-  })
+    const amount = res.data.totalAmount
+    navigate('/Checkout', { state: { props: amount } })
+})
 }
 
 const backToShop = () => {
@@ -140,7 +142,7 @@ const backToShop = () => {
     
                         </>
                       ))}
-                      <Button variant="dark" onClick = {() => {checkout()}}>Check Out</Button>
+                      <Button variant="dark" onClick = {() => {checkout(items)}}>Check Out</Button>
                      
                       <div className="pt-5">
                         <MDBTypography tag="h6" className="mb-0">

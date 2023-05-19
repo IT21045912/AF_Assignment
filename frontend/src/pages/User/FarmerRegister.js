@@ -66,6 +66,9 @@ function FarmerRegister() {
             localStorage.setItem('Role', res.data.user.role);
             localStorage.setItem('Name', res.data.user.name);
             localStorage.setItem('Email', res.data.user.email);
+            localStorage.setItem('Address', res.data.user.address);
+            localStorage.setItem('RegNo', res.data.user.RegNo);
+            localStorage.setItem('ContactNo', res.data.user.contact_number);
             localStorage.setItem('Token', res.data.token);
           })
           .catch((err) => {

@@ -25,15 +25,16 @@ function HarvestListing() {
     // const navigate = useNavigate();
 
     const token = localStorage.getItem("Token");
+    const user = localStorage.getItem("Name");
 
     useEffect(() => {
         const config = {
             headers: { 'Authorization': `Bearer ${token}` }
         };
 
-        axios.get('http://localhost:1337/api/harvest-controller/', config).then((res) => {
-            setHarvest(res.data.Harvests)
-            console.log("Fertilizers:: ", harvest);
+        axios.get(`http://localhost:1337/api/harvest-controller/seller/${user}`, config).then((res) => {
+            setHarvest(res.data.harvests);
+            console.log("Harvests: ", harvest);
         }).catch((err) => {
             alert(err);
         }).then((d) => {
@@ -83,7 +84,7 @@ function HarvestListing() {
                         </tr>
                     </thead>
                     <tbody>
-                        {harvest.filter((element) => {
+                        {harvest && harvest.filter((element) => {
                             if (search == "") {
                                 return element;
                             } else if ((element.name.toLowerCase()).includes(search.toLowerCase())) {

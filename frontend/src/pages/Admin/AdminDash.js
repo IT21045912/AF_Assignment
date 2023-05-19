@@ -71,7 +71,9 @@ function AdminDash() {
         console.log(id);
         console.log("Update");
 
-        axios.put(`http://localhost:1337/api/auth-controller/farmer/Activate/${id}`, config)
+        axios.put(`http://localhost:1337/api/auth-controller/farmer/Activate/${id}`, config).then(res => {
+            alert("User Approved !")
+        })
     }
 
     return (
