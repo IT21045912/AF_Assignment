@@ -1,4 +1,5 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -14,7 +15,9 @@ const MONGO_OPTIONS = {
 
 const MONGO_USERNAME = process.env.MONGO_USERNAME || 'root';
 const MONGO_PASSWORD = process.env.MONGO_USERNAME || 'supersecretpassword1';
-const MONGO_HOST = process.env.MONGO_URL || `mongodb+srv://dsassignment6@gmail.com:Vihanga77@@atlascluster.qiurujl.mongodb.net/test`;
+const MONGO_HOST =
+    process.env.MONGO_URL ||
+    'mongodb+srv://dsassignment6@gmail.com:Vihanga77@@atlascluster.qiurujl.mongodb.net/test';
 
 const MONGO = {
     host: MONGO_HOST,
@@ -45,4 +48,4 @@ const config = {
     server: SERVER
 };
 
-export default config;
+module.exports = config;

@@ -101,4 +101,28 @@ const deleteCartItem = async (req, res) => {
   }
 };
 
-module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem };
+const checkout = async (req, res) => {
+  const items = req.body.items;
+  console.log("comes here 1")
+  try {
+    // Calculate the total amount
+    let totalAmount = 0;
+    for (const item of items) {
+      const itemTotal = item.price * item.quantity;
+      console.log(item.price);
+      totalAmount += itemTotal;
+    }
+    
+    const response = {
+      items: items,
+      totalAmount: totalAmount
+    };
+    res.json(response);
+}catch (err) {
+  console.error(err);
+  return res.status(500).json({ error: err });
+}
+};
+
+
+module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem, checkout };

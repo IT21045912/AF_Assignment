@@ -44,7 +44,7 @@ function ViewHarvestItem() {
   const [item, setItem] = useState([]);
   const [quantity, setQuantity] = useState();
 
-
+  const navigate = useNavigate();
   const token = localStorage.getItem("Token")
   const user = localStorage.getItem("uid")
 
@@ -80,10 +80,15 @@ function ViewHarvestItem() {
     })
   };
 
+  const GoToCart = () =>{
+    navigate("/HarvestCart");
+  }
+
   const classes = useStyles();
 
   return (
     <>
+    <Button style={{ marginLeft: "10px" }} onClick={() => GoToCart()} variant="btn btn-info">🛒 My Cart</Button>
       <Container style={{ backgroundColor: 'white', width: '80%', marginTop: '20px', padding: '20px', borderRadius: '15px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2%' }}>
         </div>
