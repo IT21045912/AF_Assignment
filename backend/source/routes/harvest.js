@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', controller.createHarvest);
 router.get('/:id', controller.getHarvestById);
-router.put('/:id', controller.updateHarvest);
+router.put('/', controller.updateHarvest);
 router.get('/', controller.getAllHarvests);
 router.delete('/:id', controller.deleteHarvest);
 router.get('/seller/:sellerId', controller.getAllHarvestsBySeller);

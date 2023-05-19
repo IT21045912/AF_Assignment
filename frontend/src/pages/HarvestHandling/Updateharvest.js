@@ -50,7 +50,7 @@ function Updateharvest() {
         console.log("FormData:: ", formData);
         axios.put("http://localhost:1337/api/harvest-controller/", formData).then((res) => {
             alert("Harvest updated successfully!!!")
-            navigate("/harvestViewPage");
+            navigate("/HarvestListing");
         }).catch(err => {
             alert(err);
             console.log("this is a error")

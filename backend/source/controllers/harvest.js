@@ -108,39 +108,6 @@ const getAllHarvestsBySeller = async (req, res) => {
     }
 };
 
-// const updateHarvest = async (req, res) => {
-//     const id = req.params.id;
-//     return await Harvest.findById(id).then((Harvest) => {
-//         if (Harvest) {
-//             return Harvest.set(req.body).save().then((Harvest) => {
-//                 return res.status(201).json({ Harvest });
-//             }).catch(err => {
-//                 return res.status(500).json({ error: err });
-//             });
-//         } else {
-//             return res.status(404).json({ "message": "Harvest not found" });
-//         }
-//     }).catch(err => {
-//         return res.status(500).json({ "error": err });
-//     });
-// };
-
-//delete a harvest item
-// const deleteHarvest = async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         const harvest = await Harvest.findById(id);
-//         if (harvest) {
-//             await harvest.deleteOne();
-//             return res.status(200).json({ message: "Harvest deleted successfully" });
-//         } else {
-//             return res.status(404).json({ message: "Harvest not found" });
-//         }
-//     } catch (err) {
-//         return res.status(500).json({ error: err });
-//     }
-// };
-
 //delete a harvest item
 const deleteHarvest = async (req, res) => {
     const id = req.params.id;
