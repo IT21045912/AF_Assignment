@@ -101,28 +101,49 @@ const deleteCartItem = async (req, res) => {
   }
 };
 
+const deleteUserCart = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const result = await Cart.deleteMany({ added_by: userId });
+    if (result.deletedCount > 0) {
+      return res.status(200).json({
+        message: "Cart deleted successfully",
+      });
+    } else {
+      return res.status(404).json({ message: "No items found for the user" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+};
+
+
 const checkout = async (req, res) => {
-  const items = req.body.items;
-  console.log("comes here 1")
+  const items = req.body;
+  console.log('Items:', items);
   try {
     // Calculate the total amount
     let totalAmount = 0;
-    for (const item of items) {
-      const itemTotal = item.price * item.quantity;
-      console.log(item.price);
+    for (let i = 0; i < items.length; i++) {
+      const itemTotal = items[i].price * items[i].quantity;
       totalAmount += itemTotal;
     }
+    
+    console.log('Total Amount:', totalAmount);
     
     const response = {
       items: items,
       totalAmount: totalAmount
     };
-    res.json(response);
-}catch (err) {
-  console.error(err);
-  return res.status(500).json({ error: err });
-}
+    // Send the response as JSON
+    res.status(200).send(response);
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err });
+  }
 };
 
 
-module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem, checkout };
+
+module.exports = { createCart, getAllCarts, getCartById, updateCart, deleteCartItem, checkout, deleteUserCart };

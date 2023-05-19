@@ -16,7 +16,7 @@ import {
 import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 
-function HarvestCart() {
+function FertlizerCart() {
 
   const [items,setItems] = useState([]);
   const navigate = useNavigate();
@@ -48,12 +48,12 @@ const checkout = () => {
   axios.post('http://localhost:1337/api/cart-controller/checkout/',items).then(async res => {
     console.log(res);
     const amount = res.data.totalAmount
-    navigate('/Checkout', { state: { props: amount } })
+    navigate('/CheckoutFtz', { state: { props: amount } })
 })
 }
 
 const backToShop = () => {
-  navigate('/buyharvest')
+  navigate('/buyfertilizer')
 }
  
   return (
@@ -147,7 +147,7 @@ const backToShop = () => {
                       <div className="pt-5">
                         <MDBTypography tag="h6" className="mb-0">
                           <MDBCardText tag="a" href="#!" className="text-body">
-                          <Button onClick = {() => backToShop()} variant="secondary">Back to Harvest Shop</Button>
+                          <Button onClick = {() => backToShop()} variant="secondary">Back to Fertlizer Shop</Button>
                           </MDBCardText>
                         </MDBTypography>
                       </div>
@@ -163,4 +163,4 @@ const backToShop = () => {
     )
 }
 
-export default HarvestCart
+export default FertlizerCart

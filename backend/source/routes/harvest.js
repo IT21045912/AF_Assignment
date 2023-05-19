@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.post('/', controller.createHarvest);
 router.get('/:id', controller.getHarvestById);
-router.put('/', controller.updateHarvest);
+router.put('/:id', controller.updateHarvest);
 router.get('/', controller.getAllHarvests);
-router.get('/:id', controller.deleteHarvest);
+router.delete('/:id', controller.deleteHarvest);
 router.get('/seller/:sellerId', controller.getAllHarvestsBySeller);
 
 module.exports = router;

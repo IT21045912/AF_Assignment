@@ -64,7 +64,7 @@ router.use('/api/harvest-controller', harvestRoutes);
 router.use('/api/order-controller', orderRoutes);
 router.use('/api/loan-controller', loanRoutes);
 router.use('/api/fertilzer-controller', fertilizerRoutes);
-router.use("/api/cart-controller",cartRoutes)
+router.use("/api/cart-controller",cartRoutes);
 
 /** Error handling */
 router.use((req, res, next) => {

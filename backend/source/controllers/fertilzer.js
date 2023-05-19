@@ -79,16 +79,18 @@ const getAllFertilizers = (req, res, next) => {
 const getFertilizerById = async (req, res) => {
     const id = req.params.id;
     try {
-        const Fertilizer = await Fertilizer.findById(id);
-        if (Fertilizer) {
-            return res.status(200).json({ Fertilizer });
-        } else {
-            return res.status(404).json({ "message": "Fertilizer not found" });
-        }
+      const fertilizer = await Fertilizer.findById(id);
+      if (fertilizer) {
+        return res.status(200).json({ fertilizer });
+      } else {
+        return res.status(404).json({ message: "Fertilizer not found" });
+      }
     } catch (err) {
-        return res.status(500).json({ "error": err });
+      return res.status(500).json({ error: err.message });
     }
-};
+  };
+
+  
 
 const deleteFertilizer = async (req, res) => {
     const id = req.params.id;

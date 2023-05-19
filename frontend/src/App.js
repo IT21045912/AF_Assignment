@@ -21,8 +21,10 @@ import Updateharvest from './pages/HarvestHandling/Updateharvest';
 import AdminDash from './pages/Admin/AdminDash';
 import LoanForm from './pages/Loan/LoanForm';
 import LoanRequests from './pages/Admin/LoanRequests';
-import UserProfile from './pages/User/UserProfile';
-import Success from './pages/User/Success';
+import UserProfile from './pages/HarvestHandling/FarmerProfile';
+import FertlizerCart from './pages/FertilizerOrder/fertilizerCart';
+import Checkout from './pages/HarvestHandling/Payment';
+import CheckoutFtz from './pages/FertilizerOrder/PaymentFtz';
 import Card from './pages/User/Card';
 
 function App() {
@@ -47,14 +49,14 @@ function App() {
         <Route exact path="/FertilizerUpdate" element={<UpdateFertilizer />} />
         <Route exact path="/HarvestListing" element={<HarvestListing />} />
         <Route exact path="/HarvestCart" element={<HarvestCart />} />
+        <Route exact path="/FertilizerCart" element={<FertlizerCart />} />
         <Route exact path="/LoanForm" element={<LoanForm />} />
-        <Route exact path="/AdminDash" element={<AdminDash />} />
-        {/* {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />} */}
+        {userRole === "Admin" && <Route exact path="/AdminDash" element={<AdminDash />} />}
         <Route exact path="/RequestedLoans" element={<LoanRequests />} />
-        <Route exact path="/UserProfile" element={<UserProfile />} />
-        {/* <Route exact path="/Cart" element={<Cart />} /> */}
-        <Route exact path="/Success" element={<Success />} />
+        <Route exact path="/MyProfile" element={<UserProfile />} />
         <Route exact path="/Card" element={<Card />} />
+        <Route exact path="/Checkout" element={<Checkout />} />
+        <Route exact path="/CheckoutFtz" element={<CheckoutFtz />} />
         <Route exact path="/HarvestUpdate" element={<Updateharvest />} />
       </Routes>
     </>

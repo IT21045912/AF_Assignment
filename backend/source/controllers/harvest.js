@@ -108,7 +108,6 @@ const getAllHarvestsBySeller = async (req, res) => {
     }
 };
 
-
 // const updateHarvest = async (req, res) => {
 //     const id = req.params.id;
 //     return await Harvest.findById(id).then((Harvest) => {
